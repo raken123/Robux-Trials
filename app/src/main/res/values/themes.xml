@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.IslamiskaForbundet" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/if_navy</item>
+        <item name="android:navigationBarColor">@color/if_navy</item>
+        <item name="android:windowBackground">@color/if_navy</item>
+    </style>
+</resources>

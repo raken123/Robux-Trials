@@ -1,0 +1,66 @@
+name: Build Android (APK + AAB)
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Decode release keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.IF_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "IF_KEYSTORE_PATH=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+            echo "Signing with the release keystore"
+          else
+            echo "::warning::IF_KEYSTORE_BASE64 is not set - release builds are signed with the debug key (fine for testing, not for Google Play)."
+          fi
+
+      - name: Build APK and AAB
+        env:
+          IF_KEYSTORE_PASSWORD: ${{ secrets.IF_KEYSTORE_PASSWORD }}
+          IF_KEY_ALIAS: ${{ secrets.IF_KEY_ALIAS }}
+          IF_KEY_PASSWORD: ${{ secrets.IF_KEY_PASSWORD }}
+          IF_VERSION_CODE: ${{ github.run_number }}
+        run: ./gradlew --no-daemon assembleRelease bundleRelease
+
+      - name: Collect outputs
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/release/app-release.apk dist/IslamiskaForbundet.apk
+          cp app/build/outputs/bundle/release/app-release.aab dist/IslamiskaForbundet.aab
+          ls -la dist
+
+      - name: Upload APK + AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: islamiska-forbundet-${{ github.run_number }}
+          path: dist/*
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || format('build-{0}', github.run_number) }}
+          name: Islamiska Förbundet ${{ github.ref_type == 'tag' && github.ref_name || format('build {0}', github.run_number) }}
+          prerelease: ${{ github.ref_type != 'tag' }}
+          target_commitish: ${{ github.sha }}
+          files: dist/*
