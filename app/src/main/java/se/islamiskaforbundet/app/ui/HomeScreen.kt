@@ -81,7 +81,7 @@ fun HomeScreen(premium: Boolean, navigate: (String) -> Unit) {
             if (next != null) {
                 val (prayer, time) = next
                 val left = Duration.between(now, time).coerceAtLeast(Duration.ZERO)
-                Card(Modifier.fillMaxWidth(), onClick = { navigate(Routes.SALAH) }) {
+                Card(onClick = { navigate(Routes.SALAH) }, modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                         Text("Nästa bön", style = MaterialTheme.typography.labelLarge)
                         Text(prayer.ar, fontSize = 30.sp, color = MaterialTheme.colorScheme.primary)

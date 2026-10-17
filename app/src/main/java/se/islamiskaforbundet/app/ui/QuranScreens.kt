@@ -78,7 +78,7 @@ fun QuranListScreen(open: (Int) -> Unit) {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 2.dp)
                         .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(14.dp))
-                        .padding(12.dp)
+                        .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Box(
