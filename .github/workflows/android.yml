@@ -48,13 +48,19 @@ jobs:
           mkdir -p dist
           cp app/build/outputs/apk/release/app-release.apk dist/IslamiskaForbundet.apk
           cp app/build/outputs/bundle/release/app-release.aab dist/IslamiskaForbundet.aab
+          python3 tools/build_web.py
+          cp tools/qr/premium-30-dagar.png dist/Premium-30-dagar-gratis.png
           ls -la dist
 
       - name: Upload APK + AAB
         uses: actions/upload-artifact@v4
         with:
           name: islamiska-forbundet-${{ github.run_number }}
-          path: dist/*
+          path: |
+            dist/IslamiskaForbundet.apk
+            dist/IslamiskaForbundet.aab
+            dist/IslamiskaForbundet-web.zip
+            dist/Premium-30-dagar-gratis.png
 
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
@@ -63,4 +69,8 @@ jobs:
           name: Islamiska Förbundet ${{ github.ref_type == 'tag' && github.ref_name || format('build {0}', github.run_number) }}
           prerelease: ${{ github.ref_type != 'tag' }}
           target_commitish: ${{ github.sha }}
-          files: dist/*
+          files: |
+            dist/IslamiskaForbundet.apk
+            dist/IslamiskaForbundet.aab
+            dist/IslamiskaForbundet-web.zip
+            dist/Premium-30-dagar-gratis.png

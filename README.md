@@ -13,6 +13,20 @@ Islamiska Förbundets officiella app: spåra dina böner, lyssna på Quran och d
 | **Premium** | Prenumeration via Google Play – inga reklamer, fler videor, 98 % går till zakat. |
 | **Pengarkalkyl** | Kostnad för Hajj/Umrah och hur mycket du behöver spara per månad. |
 
+## Gratis Premium med QR-kod
+`tools/qr/premium-30-dagar.png` är ett kort med en QR-kod som ger **Premium i 30 dagar utan kort**. Användaren öppnar
+**Premium → Skanna kod** och riktar kameran mot kortet. Koden fungerar en gång per telefon.
+
+Koden har formatet `IFPREMIUM1|<kampanj>|<dagar>|<signatur>`, där signaturen är HMAC-SHA256 med `PREMIUM_CODE_KEY` i
+`Config.kt`. Ny kampanj: ändra `tools/qr/payload.txt` (signera med samma nyckel), pusha – workflowen *Premium QR code* skriver ut
+QR-modulerna i loggen – spara dem i `tools/qr/matrix.txt`, kör `python3 tools/qr/make_card.py` och pusha igen så verifierar CI
+att bilden går att läsa.
+
+## Webbversion
+`web/index.html` är en HTML-version med samma verktyg (bönetider, bönelogg, Tasbih, Quran, Qibla, Donera, videor, Premium-kod
+och Hajj-kalkyl). `python3 tools/build_web.py` bygger `dist/IslamiskaForbundet-web.zip` med videor och bilder. Packa upp och
+lägg på valfri webbserver (eller öppna `index.html`). Bönelarmet ringer bara medan sidan är öppen.
+
 ## Bönematta
 Under **Bön → Bönematta** väljer du antingen *Skapa QR-kod* (skriv ut den och fäst på mattan) eller *Registrera* för att skanna en QR-/streckkod som redan sitter på mattan. När larmet ringer öppnas kameran och endast den koden stänger av ljudet. Larmet slutar av sig självt efter 15 minuter, och det finns ett diskret nödstopp som inte loggar bönen.
 

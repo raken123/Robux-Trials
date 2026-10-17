@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1A237E">
+<title>Islamiska Förbundet</title>
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<style>
+:root {
+  --navy: #1A237E; --navy-dark: #0F1450; --gold: #C4B357; --gold-light: #E6DAA0;
+  --bg: #FAF8F0; --surface: #FFFFFF; --surface-2: #EDEBE2; --text: #15183A; --muted: #5A5E7A;
+  --primary: var(--navy); --on-primary: #fff; --danger: #B3261E; --radius: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B0E2E; --surface: #161A45; --surface-2: #1C2050; --text: #F2F1EA; --muted: #A9ACC8;
+    --primary: var(--gold); --on-primary: var(--navy-dark); --danger: #FFB4AB;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B0E2E; --surface: #161A45; --surface-2: #1C2050; --text: #F2F1EA; --muted: #A9ACC8;
+  --primary: var(--gold); --on-primary: var(--navy-dark); --danger: #FFB4AB;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); overflow-x: hidden; }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--primary); }
+.hero { background: linear-gradient(180deg, var(--navy-dark), var(--navy)); color: #fff;
+  border-radius: 0 0 28px 28px; padding: calc(18px + env(safe-area-inset-top)) 20px 20px;
+  display: flex; align-items: center; gap: 14px; }
+.hero img { width: 44px; height: 44px; }
+.hero h1 { font-size: 1.3rem; margin: 0; }
+.hero p { margin: 0; color: var(--gold-light); font-size: .9rem; }
+.hero .grow { flex: 1; min-width: 0; }
+main { max-width: 720px; margin: 0 auto; }
+.pad { padding: 16px; display: grid; gap: 12px; }
+.card { background: var(--surface); border-radius: var(--radius); padding: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.card.click { cursor: pointer; }
+h2.section { color: var(--primary); font-size: 1rem; margin: 8px 0 0; }
+.muted { color: var(--muted); font-size: .85rem; }
+.btn { border: 0; border-radius: 999px; padding: 10px 18px; background: var(--primary); color: var(--on-primary);
+  font-weight: 600; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; justify-content: center; }
+.btn.gold { background: var(--gold); color: var(--navy-dark); }
+.btn.outline { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+.btn.text { background: transparent; color: var(--primary); padding: 8px 10px; }
+.btn.block { width: 100%; }
+.btn:disabled { opacity: .5; }
+.row { display: flex; align-items: center; gap: 10px; }
+.row .grow { flex: 1; min-width: 0; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.tool { background: var(--surface); border-radius: 16px; padding: 14px 4px; text-align: center; cursor: pointer;
+  border: 0; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.tool .ic { font-size: 26px; display: block; }
+.tool span { font-size: .78rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1.5px solid var(--surface-2); background: var(--surface); border-radius: 999px; padding: 6px 12px;
+  cursor: pointer; font-size: .9rem; }
+.chip.on { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.banner { display: flex; gap: 10px; align-items: center; background: color-mix(in srgb, var(--gold) 25%, transparent);
+  border-radius: 16px; padding: 12px; cursor: pointer; }
+.big-ar { font-size: 2rem; color: var(--primary); font-family: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif; }
+.prayer-row { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 8px;
+  padding: 8px 0; border-bottom: 1px solid var(--surface-2); }
+.prayer-row:last-child { border-bottom: 0; }
+.icon-btn { border: 0; background: transparent; font-size: 1.3rem; cursor: pointer; padding: 4px; }
+input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--navy); }
+.field { display: grid; gap: 4px; }
+.field input, .field select, input.text { padding: 10px 12px; border-radius: 12px; border: 1.5px solid var(--surface-2);
+  background: var(--surface); width: 100%; }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: .8rem; }
+.bar { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--primary); }
+nav.tabs { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); display: flex;
+  justify-content: space-around; padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+  box-shadow: 0 -1px 6px rgba(0,0,0,.1); z-index: 10; }
+nav.tabs button { border: 0; background: transparent; display: grid; justify-items: center; font-size: .72rem;
+  color: var(--muted); cursor: pointer; padding: 4px 10px; border-radius: 14px; }
+nav.tabs button .ic { font-size: 1.3rem; }
+nav.tabs button.on { color: var(--primary); background: var(--surface-2); }
+.mini { position: fixed; left: 0; right: 0; bottom: calc(60px + env(safe-area-inset-bottom)); background: var(--navy-dark);
+  color: #fff; display: none; align-items: center; gap: 8px; padding: 6px 16px; z-index: 9; }
+.mini.show { display: flex; }
+.mini button { background: none; border: 0; color: var(--gold); font-size: 1.2rem; cursor: pointer; }
+.surah { display: flex; align-items: center; gap: 12px; background: var(--surface-2); border-radius: 14px; padding: 10px 12px; }
+.num { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: var(--on-primary);
+  display: grid; place-items: center; font-weight: 700; flex: none; font-size: .9rem; }
+.ayah { border-bottom: 1px solid var(--surface-2); padding: 12px 0; }
+.ayah .ar { direction: rtl; text-align: right; font-size: 1.6rem; line-height: 2.6rem;
+  font-family: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif; }
+.ayah .sv { margin-top: 6px; font-size: .95rem; }
+.tasbih-wrap { display: grid; justify-items: center; gap: 12px; padding: 16px; }
+.tasbih-btn { width: 240px; height: 240px; border-radius: 50%; border: 3px solid var(--gold);
+  background: radial-gradient(var(--navy), var(--navy-dark)); color: #fff; cursor: pointer; display: grid;
+  place-items: center; position: relative; -webkit-tap-highlight-color: transparent; user-select: none; }
+.tasbih-btn b { font-size: 4rem; }
+.tasbih-btn small { color: var(--gold-light); display: block; margin-top: -10px; }
+.ring { position: absolute; inset: -14px; }
+.video-card { padding: 0; overflow: hidden; }
+.thumb { position: relative; aspect-ratio: 16/9; background: #000 center/cover no-repeat; }
+.thumb .play { position: absolute; inset: 0; display: grid; place-items: center; font-size: 3rem;
+  background: rgba(0,0,0,.15); color: var(--gold); }
+.thumb.locked .play { background: rgba(0,0,0,.55); color: #fff; }
+.thumb .dur { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.6); color: #fff;
+  border-radius: 6px; padding: 1px 6px; font-size: .75rem; }
+.tag { background: var(--gold); color: var(--navy-dark); font-size: .7rem; border-radius: 6px; padding: 2px 8px; font-weight: 700; }
+video { width: 100%; display: block; background: #000; }
+.overlay { position: fixed; inset: 0; background: rgba(5,8,30,.92); z-index: 50; display: none; overflow-y: auto; }
+.overlay.show { display: block; }
+.overlay .box { max-width: 480px; margin: 0 auto; padding: calc(24px + env(safe-area-inset-top)) 20px 24px;
+  color: #fff; display: grid; gap: 14px; justify-items: center; text-align: center; }
+.scanner { width: 100%; aspect-ratio: 1; background: #000; border-radius: 20px; overflow: hidden; position: relative; }
+.scanner video { width: 100%; height: 100%; object-fit: cover; }
+.scanner::after { content: ""; position: absolute; inset: 18%; border: 3px solid var(--gold); border-radius: 18px; }
+.compass { width: min(300px, 80vw); aspect-ratio: 1; }
+.toast { position: fixed; left: 50%; bottom: 96px; transform: translateX(-50%); background: var(--navy-dark); color: #fff;
+  padding: 10px 16px; border-radius: 12px; z-index: 60; display: none; max-width: 90vw; }
+.toast.show { display: block; }
+.hidden { display: none !important; }
+.center { text-align: center; }
+.qrbox { background: #fff; padding: 12px; border-radius: 12px; display: inline-block; }
+</style>
+</head>
+<body>
+<main id="app"></main>
+
+<div id="mini" class="mini" aria-live="polite">
+  <span id="miniTitle" style="flex:1"></span>
+  <button id="miniToggle" aria-label="Spela eller pausa">⏯</button>
+  <button id="miniStop" aria-label="Stoppa">⏹</button>
+</div>
+<audio id="quranAudio" preload="none"></audio>
+
+<nav class="tabs" id="tabs">
+  <button data-go="home"><span class="ic">🏠</span>Hem</button>
+  <button data-go="salah"><span class="ic">🔔</span>Bön</button>
+  <button data-go="quran"><span class="ic">📖</span>Quran</button>
+  <button data-go="tasbih"><span class="ic">📿</span>Tasbih</button>
+  <button data-go="more"><span class="ic">☰</span>Mer</button>
+</nav>
+
+<div class="overlay" id="overlay"><div class="box" id="overlayBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ------------------------------------------------------------------ config */
+const CONFIG = {
+  website: "https://www.islamiskaforbundet.se",
+  swishNumber: "",          // fill in to enable Swish donations
+  bankgiro: "",
+  premiumCodeKey: "__PREMIUM_CODE_KEY__",
+  zakatPercent: 98,
+};
+const VIDEOS = /*VIDEOS_JSON*/[];
+
+/* ------------------------------------------------------------------ storage */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("if_" + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("if_" + k, JSON.stringify(v)); } catch {} },
+};
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function toast(msg, ms = 2600) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), ms); }
+const pad2 = n => String(n).padStart(2, "0");
+const hm = d => d ? pad2(d.getHours()) + ":" + pad2(d.getMinutes()) : "–";
+const dayKey = d => d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+
+/* ------------------------------------------------------------------ prayer times (PrayTimes algorithm) */
+const PRAYERS = [
+  { id: "FAJR", sv: "Fajr", ar: "الفجر" }, { id: "DHUHR", sv: "Dhuhr", ar: "الظهر" },
+  { id: "ASR", sv: "Asr", ar: "العصر" }, { id: "MAGHRIB", sv: "Maghrib", ar: "المغرب" }, { id: "ISHA", sv: "Isha", ar: "العشاء" },
+];
+const METHODS = [
+  { label: "Muslim World League", fajr: 18, isha: 17 }, { label: "ISNA (Nordamerika)", fajr: 15, isha: 15 },
+  { label: "Egyptian General Authority", fajr: 19.5, isha: 17.5 }, { label: "Umm al-Qura, Mecka", fajr: 18.5, isha: 90, ishaMin: true },
+  { label: "Karachi", fajr: 18, isha: 18 },
+];
+const CITIES = [["Stockholm",59.3293,18.0686],["Göteborg",57.7089,11.9746],["Malmö",55.6050,13.0038],["Uppsala",59.8586,17.6389],
+  ["Västerås",59.6099,16.5448],["Örebro",59.2753,15.2134],["Linköping",58.4108,15.6214],["Helsingborg",56.0465,12.6945],
+  ["Jönköping",57.7826,14.1618],["Norrköping",58.5877,16.1924],["Lund",55.7047,13.1910],["Umeå",63.8258,20.2630],
+  ["Gävle",60.6749,17.1413],["Borås",57.7210,12.9401],["Södertälje",59.1955,17.6253],["Eskilstuna",59.3666,16.5077],
+  ["Halmstad",56.6745,12.8578],["Växjö",56.8777,14.8091],["Karlstad",59.4022,13.5115],["Sundsvall",62.3908,17.3069],
+  ["Luleå",65.5848,22.1547],["Kiruna",67.8558,20.2253]];
+const R = Math.PI / 180;
+const dsin = d => Math.sin(d * R), dcos = d => Math.cos(d * R), dtan = d => Math.tan(d * R);
+const fix = (a, b) => { const r = a - b * Math.floor(a / b); return r < 0 ? r + b : r; };
+function julian(y, m, d) { if (m <= 2) { y--; m += 12; } const A = Math.floor(y / 100), B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5; }
+function sunPos(jd) { const D = jd - 2451545; const g = fix(357.529 + 0.98560028 * D, 360), q = fix(280.459 + 0.98564736 * D, 360);
+  const L = fix(q + 1.915 * dsin(g) + 0.020 * dsin(2 * g), 360), e = 23.439 - 0.00000036 * D;
+  const RA = fix(Math.atan2(dcos(e) * dsin(L), dcos(L)) / R / 15, 24);
+  return { decl: Math.asin(dsin(e) * dsin(L)) / R, eqt: q / 15 - RA }; }
+function prayerTimes(date, lat, lng, method, hanafi) {
+  const noonLocal = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12);
+  const tz = -noonLocal.getTimezoneOffset() / 60;
+  const jDate = julian(date.getFullYear(), date.getMonth() + 1, date.getDate()) - lng / (15 * 24);
+  const mid = t => fix(12 - sunPos(jDate + t).eqt, 24);
+  const sat = (a, t, ccw) => { const dec = sunPos(jDate + t).decl;
+    const tt = Math.acos((-dsin(a) - dsin(dec) * dsin(lat)) / (dcos(dec) * dcos(lat))) / R / 15; return mid(t) + (ccw ? -tt : tt); };
+  const asrT = (f, t) => { const dec = sunPos(jDate + t).decl; return sat(-Math.atan(1 / (f + dtan(Math.abs(lat - dec)))) / R, t, false); };
+  let fajr = sat(method.fajr, 5 / 24, true); const sunrise = sat(0.833, 6 / 24, true), dhuhr = mid(0.5);
+  const asr = asrT(hanafi ? 2 : 1, 13 / 24), sunset = sat(0.833, 18 / 24, false);
+  let isha = method.ishaMin ? sunset + method.isha / 60 : sat(method.isha, 18 / 24, false);
+  const night = fix(sunrise - sunset, 24);
+  if (!isNaN(night)) {
+    const fp = method.fajr / 60 * night; if (isNaN(fajr) || fix(sunrise - fajr, 24) > fp) fajr = sunrise - fp;
+    if (!method.ishaMin) { const ip = method.isha / 60 * night; if (isNaN(isha) || fix(isha - sunset, 24) > ip) isha = sunset + ip; }
+  }
+  const shift = tz - lng / 15, start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const at = (h, extra = 0) => isNaN(h) ? null : new Date(start.getTime() + Math.round((h + shift) * 60) * 60000 + extra * 60000);
+  return { FAJR: at(fajr), SUNRISE: at(sunrise), DHUHR: at(dhuhr, 1), ASR: at(asr), MAGHRIB: at(sunset, 1), ISHA: at(isha) };
+}
+const settings = () => ({ lat: store.get("lat", 59.3293), lng: store.get("lng", 18.0686), place: store.get("place", "Stockholm"),
+  method: METHODS[store.get("method", 0)] || METHODS[0], hanafi: store.get("hanafi", false) });
+function timesFor(d) { const s = settings(); return prayerTimes(d, s.lat, s.lng, s.method, s.hanafi); }
+function nextPrayer(now = new Date(), filter = () => true) {
+  for (let o = 0; o < 3; o++) { const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + o); const t = timesFor(d);
+    for (const p of PRAYERS) if (t[p.id] && t[p.id] > now && filter(p)) return { p, time: t[p.id] }; }
+  return null;
+}
+const alarmOn = p => store.get("alarm_" + p.id, p.id === "FAJR");
+const prayedMask = d => store.get("log_" + dayKey(d), 0);
+function setPrayed(d, i, on) { const m = prayedMask(d); store.set("log_" + dayKey(d), on ? m | (1 << i) : m & ~(1 << i)); }
+const bits = n => { let c = 0; while (n) { c += n & 1; n >>= 1; } return c; };
+
+/* ------------------------------------------------------------------ SHA-256 / HMAC (for Premium codes, works offline) */
+function sha256(bytes) {
+  const K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const l = bytes.length, withPad = new Uint8Array(((l + 9 + 63) >> 6) << 6); withPad.set(bytes); withPad[l] = 0x80;
+  const dv = new DataView(withPad.buffer); dv.setUint32(withPad.length - 4, l * 8); dv.setUint32(withPad.length - 8, Math.floor(l / 0x20000000));
+  const w = new Uint32Array(64), rotr = (x, n) => (x >>> n) | (x << (32 - n));
+  for (let o = 0; o < withPad.length; o += 64) {
+    for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+    for (let i = 16; i < 64; i++) { const s0 = rotr(w[i-15],7) ^ rotr(w[i-15],18) ^ (w[i-15] >>> 3), s1 = rotr(w[i-2],17) ^ rotr(w[i-2],19) ^ (w[i-2] >>> 10); w[i] = (w[i-16] + s0 + w[i-7] + s1) | 0; }
+    let [a, b, c, d, e, f, g, h] = H;
+    for (let i = 0; i < 64; i++) { const S1 = rotr(e,6) ^ rotr(e,11) ^ rotr(e,25), ch = (e & f) ^ (~e & g), t1 = (h + S1 + ch + K[i] + w[i]) | 0;
+      const S0 = rotr(a,2) ^ rotr(a,13) ^ rotr(a,22), mj = (a & b) ^ (a & c) ^ (b & c), t2 = (S0 + mj) | 0;
+      h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0; }
+    H[0] = (H[0] + a) | 0; H[1] = (H[1] + b) | 0; H[2] = (H[2] + c) | 0; H[3] = (H[3] + d) | 0;
+    H[4] = (H[4] + e) | 0; H[5] = (H[5] + f) | 0; H[6] = (H[6] + g) | 0; H[7] = (H[7] + h) | 0;
+  }
+  const out = new Uint8Array(32); const odv = new DataView(out.buffer); H.forEach((v, i) => odv.setUint32(i * 4, v)); return out;
+}
+function hmacHex(key, msg) {
+  const enc = new TextEncoder(); let k = enc.encode(key); if (k.length > 64) k = sha256(k);
+  const kk = new Uint8Array(64); kk.set(k);
+  const ip = kk.map(b => b ^ 0x36), op = kk.map(b => b ^ 0x5c), m = enc.encode(msg);
+  const inner = new Uint8Array(64 + m.length); inner.set(ip); inner.set(m, 64);
+  const ih = sha256(inner), outer = new Uint8Array(96); outer.set(op); outer.set(ih, 64);
+  return [...sha256(outer)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+/* ------------------------------------------------------------------ premium */
+const premium = {
+  get trialUntil() { return store.get("trial_until", 0); },
+  get active() { return this.trialUntil > Date.now(); },
+  redeem(raw) {
+    const p = String(raw).trim().split("|");
+    if (p.length !== 4 || p[0] !== "IFPREMIUM1") return { status: "invalid" };
+    const days = parseInt(p[2], 10); if (!(days >= 1 && days <= 365)) return { status: "invalid" };
+    if (hmacHex(CONFIG.premiumCodeKey, `IFPREMIUM1|${p[1]}|${days}`).slice(0, 20) !== p[3].toLowerCase()) return { status: "invalid" };
+    if (store.get("campaign_" + p[1], false)) return { status: "used" };
+    const until = Math.max(Date.now(), this.trialUntil) + days * 86400000;
+    store.set("campaign_" + p[1], true); store.set("trial_until", until);
+    return { status: "ok", days, until };
+  },
+};
+
+/* ------------------------------------------------------------------ QR scanning (BarcodeDetector or jsQR) */
+let jsQRPromise = null;
+function loadJsQR() {
+  if (window.jsQR) return Promise.resolve(window.jsQR);
+  return jsQRPromise ||= new Promise((ok, fail) => { const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"; s.onload = () => ok(window.jsQR); s.onerror = fail; document.head.appendChild(s); });
+}
+async function decodeFrom(source, w, h) {
+  if ("BarcodeDetector" in window) {
+    try { const det = new BarcodeDetector({ formats: ["qr_code", "ean_13", "ean_8", "code_128", "code_39", "upc_a", "data_matrix"] });
+      const r = await det.detect(source); if (r.length) return r[0].rawValue; return null; } catch {}
+  }
+  const jsQR = await loadJsQR();
+  const c = decodeFrom.c ||= document.createElement("canvas"); c.width = w; c.height = h;
+  const ctx = c.getContext("2d", { willReadFrequently: true }); ctx.drawImage(source, 0, 0, w, h);
+  const r = jsQR(ctx.getImageData(0, 0, w, h).data, w, h); return r ? r.data : null;
+}
+/** Starts the camera inside container; calls onCode(text) for each decoded code. Returns stop(). */
+async function startScanner(container, onCode) {
+  container.innerHTML = '<div class="scanner"><video playsinline muted></video></div>';
+  const video = container.querySelector("video"); let stream, alive = true;
+  try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false }); }
+  catch { container.innerHTML = '<p>Kunde inte öppna kameran. Tillåt kameran i webbläsaren och försök igen.</p>'; return () => {}; }
+  video.srcObject = stream; await video.play().catch(() => {});
+  (async function loop() {
+    while (alive) {
+      if (video.readyState >= 2) {
+        const w = 480, h = Math.round(480 * video.videoHeight / video.videoWidth) || 480;
+        try { const code = await decodeFrom(video, w, h); if (code && alive) onCode(code); } catch {}
+      }
+      await new Promise(r => setTimeout(r, 250));
+    }
+  })();
+  return () => { alive = false; stream.getTracks().forEach(t => t.stop()); };
+}
+async function decodeImageFile(file) {
+  const img = new Image(); img.src = URL.createObjectURL(file); await img.decode();
+  const scale = Math.min(1, 1200 / Math.max(img.width, img.height));
+  return decodeFrom(img, Math.round(img.width * scale), Math.round(img.height * scale));
+}
+
+/* ------------------------------------------------------------------ overlay */
+let overlayCleanup = null;
+function openOverlay(html, onClose) { closeOverlay(); $("#overlayBox").innerHTML = html; $("#overlay").classList.add("show"); overlayCleanup = onClose || null; }
+function closeOverlay() { if (overlayCleanup) { const f = overlayCleanup; overlayCleanup = null; f(); } $("#overlay").classList.remove("show"); $("#overlayBox").innerHTML = ""; }
+
+/* ------------------------------------------------------------------ views */
+const hero = (title, sub, extra = "") => `<header class="hero"><img src="logo.png" alt=""><div class="grow"><h1>${esc(title)}</h1>${sub ? `<p>${esc(sub)}</p>` : ""}</div>${extra}</header>`;
+const banner = () => premium.active ? "" : `<div class="banner" data-go="premium"><span style="font-size:1.4rem">⭐</span><div class="grow"><b>Annons · Bli Premium</b><div class="muted">Inga reklamer, fler videor – och pengarna går till zakat.</div></div>›</div>`;
+const TOOLS = [["🔔","Salah","salah"],["📿","Tasbih","tasbih"],["📖","Quran","quran"],["🧭","Qibla","qibla"],["❤️","Donera","donate"],["🎬","Videor","videos"],["⭐","Premium","premium"],["🧮","Hajj-kalkyl","hajj"]];
+
+const views = {};
+let timer = null;
+
+views.home = () => {
+  const now = new Date();
+  const date = now.toLocaleDateString("sv-SE", { weekday: "long", day: "numeric", month: "long" });
+  const n = nextPrayer();
+  return hero("Islamiska Förbundet", `${date[0].toUpperCase() + date.slice(1)} · ${settings().place}`) + `<div class="pad">
+    ${n ? `<div class="card click center" data-go="salah"><div class="muted">Nästa bön</div><div class="big-ar">${n.p.ar}</div>
+      <div style="font-size:1.3rem;font-weight:700">${n.p.sv} · ${hm(n.time)}</div><div id="countdown"></div></div>` : ""}
+    ${banner()}
+    <h2 class="section">Verktyg</h2>
+    <div class="grid4">${TOOLS.map(t => `<button class="tool" data-go="${t[2]}"><span class="ic">${t[0]}</span><span>${t[1]}</span></button>`).join("")}</div>
+    <a class="card" href="${CONFIG.website}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><b>islamiskaforbundet.se</b><div class="muted">Nyheter, aktiviteter och kontakt</div></a>
+  </div>`;
+};
+views.home.mount = () => {
+  const n = nextPrayer(); if (!n) return;
+  const tick = () => { const el = $("#countdown"); if (!el) return; const s = Math.max(0, Math.floor((n.time - new Date()) / 1000));
+    el.textContent = `om ${Math.floor(s / 3600)}:${pad2(Math.floor(s / 60) % 60)}:${pad2(s % 60)}`; if (s === 0) render(); };
+  tick(); timer = setInterval(tick, 1000);
+};
+
+views.salah = () => {
+  const s = settings(), today = new Date(), t = timesFor(today);
+  const rows = PRAYERS.map((p, i) => `${i === 1 ? `<div class="prayer-row muted"><span>Soluppgång</span><span>${hm(t.SUNRISE)}</span><span></span><span></span></div>` : ""}
+    <div class="prayer-row"><div><b>${p.sv}</b><div class="muted">${p.ar}</div></div><span style="font-size:1.1rem">${hm(t[p.id])}</span>
+    <button class="icon-btn" data-alarm="${p.id}" aria-label="Larm">${alarmOn(p) ? "🔔" : "🔕"}</button>
+    <input type="checkbox" data-prayed="${i}" ${prayedMask(today) & (1 << i) ? "checked" : ""} aria-label="Förrättad"></div>`).join("");
+  let count = 0; const week = [];
+  for (let d = 6; d >= 0; d--) { const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - d); const c = bits(prayedMask(day)); count += c;
+    week.push(`<div><div class="muted">${day.toLocaleDateString("sv-SE", { weekday: "short" })}</div><b style="color:${c === 5 ? "var(--primary)" : "inherit"}">${c}/5</b></div>`); }
+  let streak = 0, day = bits(prayedMask(today)) === 5 ? new Date(today) : new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
+  while (bits(prayedMask(day)) === 5 && streak < 3650) { streak++; day.setDate(day.getDate() - 1); }
+  const mat = store.get("mat_code", null);
+  return hero("Salah", "Bönetider för " + s.place) + `<div class="pad">
+    <h2 class="section">Idag</h2><div class="card">${rows}<p class="muted">🔔 = larm (Fajr är på från början) · ☑ = bön förrättad</p></div>
+    <h2 class="section">Senaste 7 dagarna</h2><div class="card"><b>${count} av 35 böner förrättade</b>
+      <div class="bar" style="margin:8px 0"><i style="width:${count / 35 * 100}%"></i></div><div class="week">${week.join("")}</div>
+      <p class="muted">Svit: ${streak} ${streak === 1 ? "dag" : "dagar"} med alla fem bönerna</p></div>
+    <h2 class="section">Bönematta</h2><div class="card"><b>${mat ? "✅ Din bönematta är registrerad" : "Ingen bönematta registrerad"}</b>
+      <p class="muted">När larmet ringer stängs det bara av när du skannar koden på din bönematta. I webbversionen ringer larmet medan sidan är öppen.</p>
+      <div class="row" style="flex-wrap:wrap"><button class="btn" id="regMat">📷 Registrera</button><button class="btn outline" id="makeQr">QR-kod att skriva ut</button><button class="btn text" id="testAlarm">Testa larmet</button></div></div>
+    <h2 class="section">Plats och beräkning</h2><div class="card" style="display:grid;gap:10px">
+      <div class="row"><b class="grow">${esc(s.place)}</b><button class="btn outline" id="geo">📍 Min position</button></div>
+      <label class="field"><span class="muted">Stad</span><select id="city"><option value="">Välj stad…</option>${CITIES.map((c, i) => `<option value="${i}" ${c[0] === s.place ? "selected" : ""}>${c[0]}</option>`).join("")}</select></label>
+      <label class="field"><span class="muted">Beräkningsmetod</span><select id="method">${METHODS.map((m, i) => `<option value="${i}" ${m === s.method ? "selected" : ""}>${m.label}</option>`).join("")}</select></label>
+      <label class="row"><span class="grow">Hanafi Asr</span><input type="checkbox" id="hanafi" ${s.hanafi ? "checked" : ""}></label></div>
+  </div>`;
+};
+views.salah.mount = () => {
+  const today = new Date();
+  document.querySelectorAll("[data-alarm]").forEach(b => b.onclick = () => { const p = PRAYERS.find(x => x.id === b.dataset.alarm);
+    store.set("alarm_" + p.id, !alarmOn(p)); askNotify(); render(); });
+  document.querySelectorAll("[data-prayed]").forEach(c => c.onchange = () => { setPrayed(today, +c.dataset.prayed, c.checked); render(); });
+  $("#city").onchange = e => { const c = CITIES[e.target.value]; if (!c) return; store.set("place", c[0]); store.set("lat", c[1]); store.set("lng", c[2]); render(); };
+  $("#method").onchange = e => { store.set("method", +e.target.value); render(); };
+  $("#hanafi").onchange = e => { store.set("hanafi", e.target.checked); render(); };
+  $("#geo").onclick = () => {
+    if (!navigator.geolocation) return toast("Platstjänster saknas i webbläsaren");
+    navigator.geolocation.getCurrentPosition(pos => { const { latitude: la, longitude: lo } = pos.coords;
+      const near = CITIES.map(c => [c, Math.hypot(c[1] - la, (c[2] - lo) * Math.cos(la * R))]).sort((a, b) => a[1] - b[1])[0];
+      store.set("lat", la); store.set("lng", lo); store.set("place", near[1] < 0.4 ? near[0][0] : `${la.toFixed(2)}°, ${lo.toFixed(2)}°`); render(); },
+      () => toast("Kunde inte hämta position. Välj stad istället."), { timeout: 10000 });
+  };
+  $("#regMat").onclick = () => {
+    openOverlay(`<h2>Skanna koden på din bönematta</h2><div id="scan" style="width:100%"></div><button class="btn gold" id="cancel">Avbryt</button>`);
+    startScanner($("#scan"), code => { store.set("mat_code", code); closeOverlay(); toast("Bönemattan är registrerad"); render(); }).then(stop => overlayCleanup = stop);
+    $("#cancel").onclick = closeOverlay;
+  };
+  $("#makeQr").onclick = async () => {
+    const code = "IF-BONEMATTA-" + Math.random().toString(36).slice(2, 10).toUpperCase();
+    openOverlay(`<h2>QR-kod för bönematta</h2><div class="qrbox" id="qr">Laddar…</div><div class="muted" style="color:#ccc">${code}</div>
+      <p>Skriv ut koden och fäst den på din bönematta.</p><div class="row"><button class="btn outline" id="print" style="color:#fff;border-color:#fff">Skriv ut</button><button class="btn gold" id="use">Använd koden</button></div><button class="btn text" id="cancel" style="color:var(--gold)">Stäng</button>`);
+    $("#cancel").onclick = closeOverlay;
+    $("#use").onclick = () => { store.set("mat_code", code); closeOverlay(); toast("Bönemattan är registrerad"); render(); };
+    $("#print").onclick = () => { const w = window.open(""); if (w) { w.document.write(`<title>Bönematta</title><div style="text-align:center;font-family:sans-serif">${$("#qr").innerHTML}<p>${code}</p></div>`); w.document.close(); w.print(); } };
+    try { await loadScript("https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js");
+      const q = qrcode(0, "M"); q.addData(code); q.make(); $("#qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2 }); }
+    catch { $("#qr").textContent = "Kunde inte skapa QR-koden (ingen internetanslutning)."; }
+  };
+  $("#testAlarm").onclick = () => ringAlarm((nextPrayer() || { p: PRAYERS[0] }).p, new Date());
+};
+function loadScript(src) { return new Promise((ok, fail) => { if (document.querySelector(`script[src="${src}"]`)) return ok();
+  const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail; document.head.appendChild(s); }); }
+function askNotify() { if ("Notification" in window && Notification.permission === "default") Notification.requestPermission().catch(() => {}); }
+
+/* alarm while the page is open */
+let ringing = null;
+function ringAlarm(p, time) {
+  if (ringing) return;
+  let ctx, osc, gain, vib;
+  try { ctx = new (window.AudioContext || window.webkitAudioContext)(); osc = ctx.createOscillator(); gain = ctx.createGain();
+    osc.type = "triangle"; osc.frequency.value = 660; osc.connect(gain); gain.connect(ctx.destination); osc.start();
+    const pulse = () => { if (!ringing) return; const t = ctx.currentTime; gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(0.4, t + 0.05); gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.6); ringing.to = setTimeout(pulse, 900); };
+    ringing = { stop: () => {} }; pulse(); } catch { ringing = { stop: () => {} }; }
+  if (navigator.vibrate) vib = setInterval(() => navigator.vibrate([800, 400]), 1200);
+  if ("Notification" in window && Notification.permission === "granted") try { new Notification("Dags för " + p.sv, { body: "Skanna din bönematta", icon: "logo.png" }); } catch {}
+  const stopAll = () => { if (!ringing) return; clearTimeout(ringing.to); try { osc.stop(); ctx.close(); } catch {} clearInterval(vib); if (navigator.vibrate) navigator.vibrate(0); ringing = null; };
+  ringing.stop = stopAll; const auto = setTimeout(() => { stopAll(); closeOverlay(); }, 15 * 60000);
+  const mat = store.get("mat_code", null);
+  const done = () => { setPrayed(time, PRAYERS.indexOf(p), true); stopAll(); clearTimeout(auto);
+    $("#overlayBox").innerHTML = `<img src="logo.png" width="72" alt=""><h2 style="color:var(--gold)">Må Allah acceptera din bön 🤲</h2>`; setTimeout(() => { closeOverlay(); render(); }, 2500); };
+  openOverlay(`<img src="logo.png" width="64" alt=""><div class="big-ar" style="color:var(--gold)">${p.ar}</div><h1 style="margin:0">Dags för ${p.sv}</h1><div>${hm(time)}</div>
+    ${mat ? `<p id="hint">Gå till din bönematta och skanna koden på den</p><div id="scan" style="width:100%"></div><button class="btn text" id="emerg" style="color:#999">Nödstopp (räknas inte som bön)</button>`
+          : `<p>Du har inte registrerat någon bönematta ännu.</p><button class="btn gold" id="off">Stäng av larmet</button>`}`, () => { stopAll(); clearTimeout(auto); });
+  if (mat) {
+    startScanner($("#scan"), code => { if (code === mat) done(); else { $("#hint").textContent = "Det där är inte din bönematta"; } })
+      .then(stop => { const prev = overlayCleanup; overlayCleanup = () => { stop(); prev && prev(); }; });
+    $("#emerg").onclick = closeOverlay;
+  } else { $("#off").onclick = done; }
+}
+function alarmWatcher() {
+  const now = new Date(), last = store.get("last_alarm", 0);
+  const t = timesFor(now);
+  for (const p of PRAYERS) { const at = t[p.id]; if (!at || !alarmOn(p)) continue;
+    if (now >= at && now - at < 10 * 60000 && at.getTime() > last) { store.set("last_alarm", at.getTime()); ringAlarm(p, at); break; } }
+}
+
+/* ------------------------------------------------------------------ tasbih */
+const DHIKR = [["سُبْحَانَ ٱللَّٰهِ","SubhanAllah","Ära vare Allah"],["ٱلْحَمْدُ لِلَّٰهِ","Alhamdulillah","All lov och pris tillkommer Allah"],
+  ["ٱللَّٰهُ أَكْبَرُ","Allahu Akbar","Allah är störst"],["لَا إِلَٰهَ إِلَّا ٱللَّٰهُ","La ilaha illa Allah","Det finns ingen gud utom Allah"],
+  ["أَسْتَغْفِرُ ٱللَّٰهَ","Astaghfirullah","Jag ber Allah om förlåtelse"]];
+const tz = { d: 0, target: 33, count: 0, rounds: 0 };
+views.tasbih = () => {
+  const d = DHIKR[tz.d], shown = tz.target ? tz.count % tz.target : tz.count, prog = tz.target ? (tz.count % tz.target) / tz.target : 0;
+  return hero("Tasbih", "Totalt: " + store.get("tasbih_total", 0)) + `<div class="pad">
+    <div class="chips">${DHIKR.map((x, i) => `<button class="chip ${i === tz.d ? "on" : ""}" data-dhikr="${i}">${x[1]}</button>`).join("")}</div>
+    <div class="chips">${[33, 99, 100, 0].map(t => `<button class="chip ${t === tz.target ? "on" : ""}" data-target="${t}">${t || "∞"}</button>`).join("")}</div>
+    <div class="tasbih-wrap"><div class="big-ar center">${d[0]}</div><div class="muted">${d[2]}</div>
+      <button class="tasbih-btn" id="tap" aria-label="Räkna"><svg class="ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="none" stroke="rgba(196,179,87,.25)" stroke-width="3"/>
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#C4B357" stroke-width="3" stroke-dasharray="${prog * 295.3} 400" transform="rotate(-90 50 50)" stroke-linecap="round"/></svg>
+        <div><b id="cnt">${shown}</b><small>${tz.target ? `av ${tz.target} · varv ${tz.rounds}` : "tryck"}</small></div></button>
+      <button class="btn outline" id="reset">↺ Nollställ</button></div></div>`;
+};
+views.tasbih.mount = () => {
+  $("#tap").onclick = () => { tz.count++; store.set("tasbih_total", store.get("tasbih_total", 0) + 1);
+    if (tz.target && tz.count % tz.target === 0) { tz.rounds++; navigator.vibrate && navigator.vibrate([120, 80, 120]); } else navigator.vibrate && navigator.vibrate(20); render(); };
+  $("#reset").onclick = () => { tz.count = 0; tz.rounds = 0; render(); };
+  document.querySelectorAll("[data-dhikr]").forEach(b => b.onclick = () => { tz.d = +b.dataset.dhikr; tz.count = tz.rounds = 0; render(); });
+  document.querySelectorAll("[data-target]").forEach(b => b.onclick = () => { tz.target = +b.dataset.target; tz.count = tz.rounds = 0; render(); });
+};
+
+/* ------------------------------------------------------------------ quran */
+const SURAH_NAMES = "Al-Fatiha|Öppningen;Al-Baqara|Kon;Al-Imran|Imrans ätt;An-Nisa|Kvinnorna;Al-Maida|Det dukade bordet;Al-Anam|Boskapen;Al-Araf|Höjderna;Al-Anfal|Krigsbytet;At-Tawba|Ångern;Yunus|Jona;Hud|Hud;Yusuf|Josef;Ar-Rad|Åskan;Ibrahim|Abraham;Al-Hijr|Al-Hijr;An-Nahl|Biet;Al-Isra|Den nattliga resan;Al-Kahf|Grottan;Maryam|Maria;Ta-Ha|Ta-Ha;Al-Anbiya|Profeterna;Al-Hajj|Vallfärden;Al-Muminun|De troende;An-Nur|Ljuset;Al-Furqan|Måttstocken;Ash-Shuara|Diktarna;An-Naml|Myrorna;Al-Qasas|Berättelsen;Al-Ankabut|Spindeln;Ar-Rum|Bysantinerna;Luqman|Luqman;As-Sajda|Nedfallandet;Al-Ahzab|De sammansvurna;Saba|Saba;Fatir|Skaparen;Ya-Sin|Ya-Sin;As-Saffat|De som står i led;Sad|Sad;Az-Zumar|Skarorna;Ghafir|Den som förlåter;Fussilat|Klart utlagda;Ash-Shura|Rådslaget;Az-Zukhruf|Guldprakten;Ad-Dukhan|Röken;Al-Jathiya|Den knäböjande;Al-Ahqaf|Sanddynerna;Muhammad|Muhammad;Al-Fath|Segern;Al-Hujurat|De inre rummen;Qaf|Qaf;Adh-Dhariyat|De virvlande vindarna;At-Tur|Berget;An-Najm|Stjärnan;Al-Qamar|Månen;Ar-Rahman|Den Nåderike;Al-Waqia|Det oundvikliga;Al-Hadid|Järnet;Al-Mujadila|Den som vädjar;Al-Hashr|Uppbrottet;Al-Mumtahana|Den som prövas;As-Saff|Leden;Al-Jumua|Fredagsbönen;Al-Munafiqun|Hycklarna;At-Taghabun|Den ömsesidiga förlusten;At-Talaq|Skilsmässan;At-Tahrim|Förbudet;Al-Mulk|Herraväldet;Al-Qalam|Pennan;Al-Haqqa|Den ofrånkomliga verkligheten;Al-Maarij|Uppstigningens vägar;Nuh|Noa;Al-Jinn|Jinnerna;Al-Muzzammil|Den insvepte;Al-Muddaththir|Den inhöljde;Al-Qiyama|Uppståndelsen;Al-Insan|Människan;Al-Mursalat|De utsända;An-Naba|Budskapet;An-Naziat|De som drar ut;Abasa|Han rynkade pannan;At-Takwir|Hopvecklandet;Al-Infitar|Rämnandet;Al-Mutaffifin|De som snålar;Al-Inshiqaq|Klyvandet;Al-Buruj|Stjärnbilderna;At-Tariq|Nattstjärnan;Al-Ala|Den Högste;Al-Ghashiya|Det överväldigande;Al-Fajr|Gryningen;Al-Balad|Staden;Ash-Shams|Solen;Al-Layl|Natten;Ad-Duha|Förmiddagen;Ash-Sharh|Öppnandet;At-Tin|Fikonträdet;Al-Alaq|Blodlevret;Al-Qadr|Allmaktens natt;Al-Bayyina|Det klara beviset;Az-Zalzala|Jordbävningen;Al-Adiyat|De ilande;Al-Qaria|Den dånande;At-Takathur|Kapplöpningen;Al-Asr|Tiden;Al-Humaza|Baktalaren;Al-Fil|Elefanten;Quraysh|Quraysh;Al-Maun|Den minsta hjälpen;Al-Kawthar|Överflödet;Al-Kafirun|De förnekande;An-Nasr|Hjälpen;Al-Masad|Palmfibrerna;Al-Ikhlas|Den uppriktiga tron;Al-Falaq|Gryningsljuset;An-Nas|Människorna".split(";");
+const AYAHS = [7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
+const SURAHS = SURAH_NAMES.map((s, i) => { const [name, meaning] = s.split("|"); return { n: i + 1, name, meaning, ayahs: AYAHS[i] }; });
+const RECITERS = [["ar.alafasy", "Alafasy"], ["ar.husary", "Al-Husary"]];
+const audio = () => $("#quranAudio");
+let playing = null;
+function playSurah(n) { const a = audio(); a.src = `https://cdn.islamic.network/quran/audio-surah/128/${store.get("reciter", "ar.alafasy")}/${n}.mp3`;
+  a.play().catch(() => toast("Kunde inte spela upp ljudet")); playing = n; updateMini(); }
+function updateMini() { const m = $("#mini"); if (!playing) return m.classList.remove("show");
+  m.classList.add("show"); $("#miniTitle").textContent = `${audio().paused ? "⏸" : "▶"} ${playing}. ${SURAHS[playing - 1].name}`; }
+let quranQuery = "";
+views.quran = () => hero("Quran", "114 suror · arabiska och svenska") + `<div class="pad">
+  <input class="text" id="q" placeholder="Sök sura" value="${esc(quranQuery)}" aria-label="Sök sura">
+  <div id="slist" style="display:grid;gap:6px"></div></div>`;
+views.quran.mount = () => {
+  const list = () => { const q = quranQuery.trim().toLowerCase();
+    $("#slist").innerHTML = SURAHS.filter(s => !q || s.name.toLowerCase().includes(q) || s.meaning.toLowerCase().includes(q) || String(s.n) === q)
+      .map(s => `<div class="surah"><div class="num">${s.n}</div><div class="grow"><b>${s.name}</b><div class="muted">${s.meaning} · ${s.ayahs} verser</div></div>
+        <button class="icon-btn" data-play="${s.n}" aria-label="Lyssna">${playing === s.n && !audio().paused ? "⏸" : "▶️"}</button><button class="btn" data-go="surah/${s.n}">Läs</button></div>`).join("");
+    document.querySelectorAll("[data-play]").forEach(b => b.onclick = () => { const n = +b.dataset.play;
+      if (playing === n) { audio().paused ? audio().play() : audio().pause(); } else playSurah(n); setTimeout(list, 100); });
+  };
+  $("#q").oninput = e => { quranQuery = e.target.value; list(); }; list();
+};
+views.surah = (n) => { const s = SURAHS[n - 1];
+  return hero(`${s.n}. ${s.name}`, `${s.meaning} · ${s.ayahs} verser`, `<button class="icon-btn" id="sp" style="color:var(--gold);font-size:2rem">▶</button>`) + `<div class="pad">
+    <div class="chips">${RECITERS.map(r => `<button class="chip ${store.get("reciter", "ar.alafasy") === r[0] ? "on" : ""}" data-rec="${r[0]}">${r[1]}</button>`).join("")}
+    <button class="chip ${store.get("showSv", true) ? "on" : ""}" id="svT">Svenska</button></div><div id="text">Laddar…</div></div>`; };
+views.surah.mount = async (n) => {
+  $("#sp").onclick = () => { if (playing === n) { audio().paused ? audio().play() : audio().pause(); } else playSurah(n); };
+  document.querySelectorAll("[data-rec]").forEach(b => b.onclick = () => { store.set("reciter", b.dataset.rec); if (playing === n) playSurah(n); render(); });
+  $("#svT").onclick = () => { store.set("showSv", !store.get("showSv", true)); render(); };
+  const key = "surah_" + n; let data = null;
+  try { data = JSON.parse(localStorage.getItem(key) || "null"); } catch {}
+  if (!data) { try { const r = await fetch(`https://api.alquran.cloud/v1/surah/${n}/editions/quran-uthmani,sv.bernstrom`); if (!r.ok) throw 0;
+    data = (await r.json()).data; try { localStorage.setItem(key, JSON.stringify(data)); } catch {} } catch { const el = $("#text"); if (el) el.innerHTML = `<p>Kunde inte hämta suran. Kontrollera internetanslutningen.</p>`; return; } }
+  const el = $("#text"); if (!el) return; const sv = store.get("showSv", true);
+  el.innerHTML = `<div class="big-ar center">${esc(data[0].name)}</div>` + data[0].ayahs.map((a, i) => `<div class="ayah"><div class="ar">${esc(a.text)} <span class="tag">${a.numberInSurah}</span></div>
+    ${sv ? `<div class="sv">${esc(data[1].ayahs[i]?.text || "")}</div>` : ""}</div>`).join("") + `<p class="muted">Svensk översättning: Knut Bernström. Text och ljud från alquran.cloud / islamic.network.</p>`;
+};
+
+/* ------------------------------------------------------------------ more */
+views.more = () => hero("Mer", "Alla verktyg") + `<div class="pad"><div class="grid4">${TOOLS.map(t => `<button class="tool" data-go="${t[2]}"><span class="ic">${t[0]}</span><span>${t[1]}</span></button>`).join("")}</div>
+  <div class="card"><b>Om webbversionen</b><p class="muted">Webbversionen har samma verktyg som Android-appen. Bönelarmet ringer bara medan sidan är öppen – installera Android-appen för larm även när telefonen är låst.</p>
+  <div class="row"><span class="grow">Tema</span><select id="theme"><option value="">System</option><option value="light">Ljust</option><option value="dark">Mörkt</option></select></div></div></div>`;
+views.more.mount = () => { $("#theme").value = store.get("theme", ""); $("#theme").onchange = e => { store.set("theme", e.target.value); applyTheme(); }; };
+
+/* qibla */
+const KAABA = [21.422487, 39.826206];
+function qiblaBearing(lat, lng) { const p = lat * R, pk = KAABA[0] * R, dl = (KAABA[1] - lng) * R;
+  return (Math.atan2(Math.sin(dl), Math.cos(p) * Math.tan(pk) - Math.sin(p) * Math.cos(dl)) / R + 360) % 360; }
+function distKm(a, b, c, d) { const x = Math.sin((c - a) * R / 2) ** 2 + Math.cos(a * R) * Math.cos(c * R) * Math.sin((d - b) * R / 2) ** 2; return 6371 * 2 * Math.asin(Math.sqrt(x)); }
+let headingHandler = null;
+views.qibla = () => { const s = settings(), q = qiblaBearing(s.lat, s.lng);
+  const ticks = Array.from({ length: 72 }, (_, i) => { const a = i * 5 * R, l = i % 18 === 0 ? 14 : i % 2 === 0 ? 8 : 4;
+    return `<line x1="${150 + 135 * Math.sin(a)}" y1="${150 - 135 * Math.cos(a)}" x2="${150 + (135 - l) * Math.sin(a)}" y2="${150 - (135 - l) * Math.cos(a)}" stroke="${i === 0 ? "#d33" : "currentColor"}" stroke-width="${i % 18 === 0 ? 3 : 1.5}"/>`; }).join("");
+  return hero("Qibla", `${s.place} · ${Math.round(distKm(s.lat, s.lng, ...KAABA))} km till Mecka`) + `<div class="pad center">
+    <b id="qstatus">Tryck på Starta kompass och vrid telefonen tills pilen pekar uppåt</b>
+    <svg class="compass" viewBox="0 0 300 300" style="margin:0 auto;color:var(--primary)">
+      <circle cx="150" cy="150" r="140" fill="color-mix(in srgb, var(--primary) 10%, transparent)" stroke="currentColor" stroke-width="4" id="qring"/>
+      <g id="dial">${ticks}<text x="150" y="44" text-anchor="middle" fill="#d33" font-weight="700">N</text></g>
+      <g id="arrow" transform="rotate(${q} 150 150)"><path d="M150 38 L132 160 L150 150 L168 160 Z" fill="#C4B357"/><rect x="141" y="16" width="18" height="18" fill="#111"/><rect x="141" y="21" width="18" height="3" fill="#C4B357"/></g>
+      <circle cx="150" cy="150" r="6" fill="#C4B357"/></svg>
+    <div style="font-size:1.3rem;font-weight:700">Qibla: ${Math.round(q)}° från norr</div><div id="qhead" class="muted"></div>
+    <button class="btn" id="qstart">🧭 Starta kompass</button>
+    <p class="muted">Håll telefonen plant och undan från metall. Utan kompass: rikta dig ${Math.round(q)}° medurs från norr.</p></div>`; };
+views.qibla.mount = () => { const s = settings(), q = qiblaBearing(s.lat, s.lng);
+  const onH = h => { const t = ((q - h) % 360 + 360) % 360; $("#arrow")?.setAttribute("transform", `rotate(${t} 150 150)`);
+    $("#dial")?.setAttribute("transform", `rotate(${-h} 150 150)`); const ok = t < 4 || t > 356;
+    const st = $("#qstatus"); if (st) { st.textContent = ok ? "Du är vänd mot Qibla ✓" : "Vrid telefonen tills pilen pekar uppåt"; st.style.color = ok ? "var(--gold)" : ""; }
+    const hh = $("#qhead"); if (hh) hh.textContent = `Riktning just nu: ${Math.round(h)}°`; };
+  headingHandler = e => { let h = null; if (typeof e.webkitCompassHeading === "number") h = e.webkitCompassHeading; else if (e.absolute && e.alpha !== null) h = 360 - e.alpha; if (h !== null) onH(h); };
+  $("#qstart").onclick = async () => {
+    try { if (typeof DeviceOrientationEvent !== "undefined" && DeviceOrientationEvent.requestPermission) { if (await DeviceOrientationEvent.requestPermission() !== "granted") throw 0; } } catch { return toast("Kompassen fick inte behörighet"); }
+    window.addEventListener("deviceorientationabsolute", headingHandler); window.addEventListener("deviceorientation", headingHandler); $("#qstart").classList.add("hidden");
+  };
+};
+
+/* donate */
+const CAUSES = [["Allmän gåva","Stöd Islamiska Förbundets verksamhet där behovet är störst."],["Zakat","Din obligatoriska zakat fördelas till de berättigade grupperna."],
+  ["Sadaqa","Frivillig välgörenhet till behövande."],["Moské och lokaler","Drift och underhåll av moskéer och samlingslokaler."],
+  ["Utbildning och ungdom","Koranskola, föreläsningar och ungdomsverksamhet."],["Ramadan & iftar","Iftar-måltider och Ramadan-aktiviteter."]];
+const don = { cause: 0, amount: "200" };
+views.donate = () => hero("Donera", "Stöd Islamiska Förbundet") + `<div class="pad">
+  <p style="color:var(--primary)">"Den som ger i Guds väg är som ett sädeskorn som skjuter sju ax, och i varje ax finns hundra korn." (2:261)</p>
+  <h2 class="section">Ändamål</h2><div class="chips">${CAUSES.map((c, i) => `<button class="chip ${i === don.cause ? "on" : ""}" data-cause="${i}">${c[0]}</button>`).join("")}</div>
+  <div class="muted">${CAUSES[don.cause][1]}</div>
+  <h2 class="section">Belopp</h2><div class="chips">${[100, 200, 500, 1000, 2500].map(a => `<button class="chip ${don.amount == a ? "on" : ""}" data-amt="${a}">${a} kr</button>`).join("")}</div>
+  <label class="field"><span class="muted">Eget belopp (kr)</span><input id="amt" inputmode="numeric" value="${esc(don.amount)}"></label>
+  <button class="btn gold block" id="pay">${CONFIG.swishNumber ? `Swisha ${esc(don.amount)} kr` : "Donera via webbplatsen"}</button>
+  ${CONFIG.swishNumber ? `<div class="muted">Swish-nummer: ${esc(CONFIG.swishNumber)}</div>` : ""}
+  ${CONFIG.bankgiro ? `<div class="card"><b>Bankgiro</b><div>${esc(CONFIG.bankgiro)}</div><div class="muted">Märk betalningen med "${CAUSES[don.cause][0]}".</div></div>` : ""}
+  <a class="btn outline block" href="${CONFIG.website}" target="_blank" rel="noopener">Fler sätt att ge på islamiskaforbundet.se</a></div>`;
+views.donate.mount = () => {
+  document.querySelectorAll("[data-cause]").forEach(b => b.onclick = () => { don.cause = +b.dataset.cause; render(); });
+  document.querySelectorAll("[data-amt]").forEach(b => b.onclick = () => { don.amount = b.dataset.amt; render(); });
+  $("#amt").oninput = e => { don.amount = e.target.value.replace(/\D/g, "").slice(0, 7); e.target.value = don.amount; };
+  $("#pay").onclick = () => { if (!CONFIG.swishNumber) return window.open(CONFIG.website, "_blank");
+    const amt = parseInt(don.amount, 10) || 0;
+    const data = { version: 1, payee: { value: CONFIG.swishNumber.replace(/\D/g, "") }, amount: { value: amt, editable: !amt }, message: { value: CAUSES[don.cause][0], editable: false } };
+    location.href = "swish://payment?data=" + encodeURIComponent(JSON.stringify(data)); };
+};
+
+/* videos */
+views.videos = () => hero("Islamiska videor", premium.active ? "Premium · alla videor" : "Lås upp fler med Premium") + `<div class="pad">${banner()}
+  ${VIDEOS.map(v => { const locked = v.premium && !premium.active; const d = Math.round(v.duration);
+    return `<div class="card click video-card" data-go="${locked ? "premium" : "video/" + v.slug}"><div class="thumb ${locked ? "locked" : ""}" style="background-image:url('thumbs/thumb_${v.slug}.jpg')">
+      <div class="play">${locked ? "🔒" : "▶"}</div><span class="dur">${Math.floor(d / 60)}:${pad2(d % 60)}</span></div>
+      <div class="row" style="padding:12px 14px"><div class="grow"><b>${esc(v.title)}</b><div class="muted">${esc(v.subtitle)}</div></div>${v.premium ? '<span class="tag">Premium</span>' : ""}</div></div>`; }).join("")}</div>`;
+views.video = (slug) => { const v = VIDEOS.find(x => x.slug === slug); if (!v) return views.videos();
+  if (v.premium && !premium.active) return views.premium();
+  return `<video id="vid" src="videos/video_${v.slug}.mp4" controls playsinline autoplay></video><div class="pad">
+    <h2 style="margin:0">${esc(v.title)}</h2><div class="muted">${esc(v.subtitle)}</div>
+    <label class="row card"><div class="grow"><b>Berättarröst</b><div class="muted" id="ttsInfo">Läser texten högt på svenska</div></div><input type="checkbox" id="narr" ${store.get("narration", true) ? "checked" : ""}></label>
+    <p class="muted">Animerad video av Islamiska Förbundet. Texten visas även i bild.</p></div>`; };
+let narrTimer = null;
+views.video.mount = (slug) => { const v = VIDEOS.find(x => x.slug === slug), vid = $("#vid"); if (!v || !vid) return;
+  audio().pause(); const synth = window.speechSynthesis;
+  if (!synth) { $("#narr").disabled = true; $("#ttsInfo").textContent = "Webbläsaren saknar talsyntes"; }
+  $("#narr").onchange = e => { store.set("narration", e.target.checked); if (!e.target.checked) synth && synth.cancel(); };
+  const voice = () => (synth?.getVoices() || []).find(x => /^sv/i.test(x.lang));
+  let last = 0;
+  narrTimer = setInterval(() => { if (!synth) return; const now = vid.currentTime;
+    if (vid.paused) { synth.cancel(); last = now; return; }
+    if (now < last || now - last > 1.5) { synth.cancel(); last = now; return; }
+    if (store.get("narration", true)) { const cue = v.cues.find(c => c.t > last && c.t <= now);
+      if (cue) { synth.cancel(); const u = new SpeechSynthesisUtterance(cue.text); u.lang = "sv-SE"; const vo = voice(); if (vo) u.voice = vo; u.rate = 0.95; synth.speak(u); } }
+    last = now; }, 150);
+};
+
+/* premium */
+views.premium = () => { const until = premium.trialUntil, active = premium.active;
+  const days = Math.max(1, Math.ceil((until - Date.now()) / 86400000));
+  return hero("Premium", `${CONFIG.zakatPercent}% av pengarna går till zakat`) + `<div class="pad">
+    ${active ? `<div class="card row"><span style="font-size:2rem">✅</span><div><b>Gratis Premium – ${days} ${days === 1 ? "dag" : "dagar"} kvar</b>
+      <div class="muted">Gäller till och med ${new Date(until).toLocaleDateString("sv-SE", { day: "numeric", month: "long", year: "numeric" })}. Inget kort behövs.</div></div></div>` : ""}
+    <div class="center" style="font-size:4rem;font-weight:800;color:var(--primary)">${CONFIG.zakatPercent}%</div>
+    <div class="center">av intäkterna från Premium går till zakat och hjälper behövande.</div>
+    <div class="card"><b>🚫 Inga reklamer</b><div class="muted">Appen blir helt fri från annonser.</div></div>
+    <div class="card"><b>🎬 Fler videor</b><div class="muted">Lås upp alla animerade videor: Hajj, Ramadan, Zakat och bönetiderna.</div></div>
+    <div class="card"><b>🤲 Ge varje månad</b><div class="muted">Din prenumeration blir en löpande gåva.</div></div>
+    <button class="btn gold block" id="scanCode">📷 Skanna kod för gratis Premium</button>
+    <div class="row"><label class="btn outline grow" style="cursor:pointer">🖼️ Välj bild med koden<input type="file" accept="image/*" id="codeImg" class="hidden"></label></div>
+    <div id="codeMsg" style="font-weight:700;color:var(--primary)"></div>
+    <p class="muted">Månadsprenumerationen köps i Android-appen via Google Play.</p></div>`; };
+views.premium.mount = () => {
+  const show = r => { const m = $("#codeMsg"); if (!m) return;
+    if (r.status === "ok") { m.textContent = `🎉 Premium är aktiverat i ${r.days} dagar!`; setTimeout(render, 1200); }
+    else m.textContent = r.status === "used" ? "Den här koden har redan använts här." : "Ogiltig kod – försök igen."; };
+  $("#scanCode").onclick = () => {
+    openOverlay(`<h2>Skanna Premium-koden</h2><div id="scan" style="width:100%"></div><div id="smsg"></div><button class="btn gold" id="cancel">Avbryt</button>`);
+    $("#cancel").onclick = closeOverlay;
+    startScanner($("#scan"), code => { const r = premium.redeem(code);
+      if (r.status === "invalid") { $("#smsg").textContent = "Ogiltig kod – försök igen."; return; } closeOverlay(); show(r); }).then(stop => overlayCleanup = stop);
+  };
+  $("#codeImg").onchange = async e => { const f = e.target.files[0]; if (!f) return;
+    try { const code = await decodeImageFile(f); show(code ? premium.redeem(code) : { status: "invalid" }); } catch { show({ status: "invalid" }); } };
+};
+
+/* hajj calculator */
+const TRIPS = { hajj: { label: "Hajj", days: 21, pkg: 75000, hady: 2500 }, umrah: { label: "Umrah", days: 10, pkg: 18000, hady: 0 } };
+const hc = { trip: "hajj", v: null };
+function hajjDefaults(t) { const T = TRIPS[t]; return [["Antal personer", 1, 0], ["Resepaket per person (flyg, hotell, transport)", T.pkg, 1], ["Visum och avgifter per person", 2000, 1],
+  ["Antal dagar", T.days, 0], ["Mat per person och dag", 250, 1], ["Offerdjur (hady) per person", T.hady, 1], ["Fickpengar och gåvor per person", 3000, 1],
+  ["Månader kvar till resan", 12, 0], ["Redan sparat", 0, 1]]; }
+views.hajj = () => { if (!hc.v) hc.v = hajjDefaults(hc.trip);
+  return hero("Pengarkalkyl", "Planera och spara till din resa") + `<div class="pad">
+    <div class="chips">${Object.entries(TRIPS).map(([k, t]) => `<button class="chip ${k === hc.trip ? "on" : ""}" data-trip="${k}">${t.label}</button>`).join("")}</div>
+    <div class="card" id="hres"></div>
+    ${hc.v.map((f, i) => `<label class="field"><span class="muted">${f[0]}${f[2] ? " (kr)" : ""}</span><input inputmode="numeric" data-h="${i}" value="${f[1]}"></label>`).join("")}
+    <p class="muted">Förifyllda belopp är ungefärliga uppskattningar. Kontrollera aktuella priser hos en godkänd resebyrå. Hajj är en plikt för den som har råd – planera utan lån med ränta.</p></div>`; };
+views.hajj.mount = () => {
+  const fmt = n => n.toLocaleString("sv-SE");
+  const calc = () => { const v = hc.v.map(f => +f[1] || 0); const per = v[1] + v[2] + v[3] * v[4] + v[5] + v[6], total = per * v[0];
+    const rem = Math.max(0, total - v[8]), months = v[7], monthly = months > 0 ? Math.ceil(rem / months) : rem;
+    $("#hres").innerHTML = `<div class="muted">Totalt för ${TRIPS[hc.trip].label}</div><div style="font-size:1.8rem;font-weight:800;color:var(--primary)">${fmt(total)} kr</div>
+      <div class="muted">${fmt(per)} kr per person</div><hr style="border:0;border-top:1px solid var(--surface-2)"><b>Spara ${fmt(monthly)} kr i månaden</b>
+      <div class="muted">${months > 0 ? `för att ha ${fmt(rem)} kr kvar att spara ihop om ${months} månader` : "Ange antal månader kvar för en sparplan"}</div>`; };
+  document.querySelectorAll("[data-h]").forEach(inp => inp.oninput = () => { inp.value = inp.value.replace(/\D/g, "").slice(0, 9); hc.v[+inp.dataset.h][1] = inp.value; calc(); });
+  document.querySelectorAll("[data-trip]").forEach(b => b.onclick = () => { hc.trip = b.dataset.trip; hc.v = hajjDefaults(hc.trip); render(); });
+  calc();
+};
+
+/* ------------------------------------------------------------------ router */
+function cleanup() { clearInterval(timer); timer = null; clearInterval(narrTimer); narrTimer = null; window.speechSynthesis?.cancel();
+  if (headingHandler) { window.removeEventListener("deviceorientationabsolute", headingHandler); window.removeEventListener("deviceorientation", headingHandler); headingHandler = null; } }
+function render() {
+  cleanup();
+  const [name, arg] = (location.hash.slice(1) || "home").split("/");
+  const view = views[name] || views.home;
+  $("#app").innerHTML = view(arg && !isNaN(arg) ? +arg : arg);
+  view.mount && view.mount(arg && !isNaN(arg) ? +arg : arg);
+  const tab = ["home", "salah", "quran", "tasbih"].includes(name) ? name : name === "surah" ? "quran" : "more";
+  document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.go === tab));
+}
+document.addEventListener("click", e => { const g = e.target.closest("[data-go]"); if (!g) return; e.preventDefault();
+  const to = "#" + g.dataset.go; if (location.hash === to) render(); else { location.hash = to; } window.scrollTo(0, 0); });
+window.addEventListener("hashchange", render);
+function applyTheme() { const t = store.get("theme", ""); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; }
+$("#miniToggle").onclick = () => { audio().paused ? audio().play() : audio().pause(); };
+$("#miniStop").onclick = () => { audio().pause(); playing = null; updateMini(); };
+audio().addEventListener("play", updateMini); audio().addEventListener("pause", updateMini);
+audio().addEventListener("ended", () => { playing = null; updateMini(); });
+audio().addEventListener("error", () => { if (playing) toast("Kunde inte spela upp: kontrollera internetanslutningen"); });
+applyTheme(); render(); setInterval(alarmWatcher, 15000); alarmWatcher();
+</script>
+</body>
+</html>
