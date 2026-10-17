@@ -11,4 +11,5 @@ object Routes {
     const val VIDEOS = "videos"
     const val PREMIUM = "premium"
     const val HAJJ = "hajj"
+    const val VIDEO = "video"
 }

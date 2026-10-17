@@ -87,6 +87,7 @@ dependencies {
 
     // Quran audio
     implementation("androidx.media3:media3-exoplayer:1.5.1")
+    implementation("androidx.media3:media3-ui:1.5.1")
 
     // Premium subscription
     implementation("com.android.billingclient:billing-ktx:7.1.1")

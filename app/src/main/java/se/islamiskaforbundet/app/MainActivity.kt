@@ -47,6 +47,7 @@ import se.islamiskaforbundet.app.ui.Routes
 import se.islamiskaforbundet.app.ui.SalahScreen
 import se.islamiskaforbundet.app.ui.SurahScreen
 import se.islamiskaforbundet.app.ui.TasbihScreen
+import se.islamiskaforbundet.app.ui.VideoPlayerScreen
 import se.islamiskaforbundet.app.ui.VideosScreen
 
 class MainActivity : ComponentActivity() {
@@ -123,7 +124,10 @@ private fun AppRoot() {
             }
             composable(Routes.QIBLA) { QiblaScreen() }
             composable(Routes.DONATE) { DonateScreen() }
-            composable(Routes.VIDEOS) { VideosScreen(premium) { go(Routes.PREMIUM) } }
+            composable(Routes.VIDEOS) {
+                VideosScreen(premium, openPremium = { go(Routes.PREMIUM) }, play = { slug -> nav.navigate("${Routes.VIDEO}/$slug") })
+            }
+            composable("${Routes.VIDEO}/{slug}") { VideoPlayerScreen(it.arguments?.getString("slug").orEmpty()) }
             composable(Routes.PREMIUM) { PremiumScreen() }
             composable(Routes.HAJJ) { HajjScreen() }
         }

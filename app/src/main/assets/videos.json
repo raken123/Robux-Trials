@@ -1,0 +1,362 @@
+[
+ {
+  "slug": "pelare",
+  "title": "Islams fem pelare",
+  "subtitle": "Grunden i en muslims liv",
+  "premium": false,
+  "duration": 71.8,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Islams fem pelare"
+   },
+   {
+    "t": 3.3,
+    "text": "Profeten Muhammad (frid vare med honom) sa: Islam är byggt på fem pelare."
+   },
+   {
+    "t": 10.81,
+    "text": "Den första pelaren är Shahada, trosbekännelsen: Det finns ingen gud utom Allah, och Muhammad är Allahs sändebud."
+   },
+   {
+    "t": 20.14,
+    "text": "Den andra pelaren är Salah: bönen fem gånger om dagen, vid Fajr, Dhuhr, Asr, Maghrib och Isha."
+   },
+   {
+    "t": 29.46,
+    "text": "Den tredje pelaren är Zakat: en årlig allmosa på två och en halv procent av sparat kapital till de behövande."
+   },
+   {
+    "t": 40.15,
+    "text": "Den fjärde pelaren är Sawm: att fasta från gryning till solnedgång under månaden Ramadan."
+   },
+   {
+    "t": 48.12,
+    "text": "Den femte pelaren är Hajj: vallfärden till Mecka, en gång i livet för den som har hälsa och råd."
+   },
+   {
+    "t": 58.35,
+    "text": "Tillsammans bär pelarna upp hela byggnaden. Den som håller fast vid dem bygger sitt liv på en stadig grund."
+   }
+  ]
+ },
+ {
+  "slug": "salah",
+  "title": "Så ber du",
+  "subtitle": "Bönen steg för steg",
+  "premium": false,
+  "duration": 93.9,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Så ber du"
+   },
+   {
+    "t": 3.3,
+    "text": "Vänd dig mot Qibla, stå upprätt på bönemattan och gör din avsikt, niyya, i hjärtat."
+   },
+   {
+    "t": 11.72,
+    "text": "Lyft händerna och säg Allahu Akbar för att påbörja bönen."
+   },
+   {
+    "t": 17.86,
+    "text": "Lägg höger hand över vänster på bröstet och recitera Al-Fatiha och en kort sura."
+   },
+   {
+    "t": 25.83,
+    "text": "Säg Allahu Akbar och buga med rak rygg och händerna på knäna. Säg tre gånger Subhana Rabbiyal Adhim."
+   },
+   {
+    "t": 35.61,
+    "text": "Res dig upp och säg Sami Allahu liman hamidah, Rabbana wa lakal hamd."
+   },
+   {
+    "t": 43.12,
+    "text": "Säg Allahu Akbar och gå ner i sujud med panna, näsa, händer, knän och tår mot marken. Säg tre gånger Subhana Rabbiyal Ala."
+   },
+   {
+    "t": 55.17,
+    "text": "Sätt dig upp en kort stund och säg Rabbighfir li, och gå sedan ner i en andra sujud."
+   },
+   {
+    "t": 64.95,
+    "text": "Res dig för nästa rakat och upprepa. Efter den andra rakaten sitter du och läser tashahhud."
+   },
+   {
+    "t": 73.83,
+    "text": "Avsluta genom att vända huvudet åt höger och sedan åt vänster och säga As-salamu alaykum wa rahmatullah."
+   },
+   {
+    "t": 83.15,
+    "text": "Fajr har två rakat, Dhuhr fyra, Asr fyra, Maghrib tre och Isha fyra."
+   }
+  ]
+ },
+ {
+  "slug": "wudu",
+  "title": "Wudu",
+  "subtitle": "Tvagningen steg för steg",
+  "premium": false,
+  "duration": 83.8,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Wudu"
+   },
+   {
+    "t": 3.3,
+    "text": "Wudu, den rituella tvagningen, behövs före bönen. Så här går den till steg för steg."
+   },
+   {
+    "t": 11.72,
+    "text": "Gör avsikten i hjärtat och säg Bismillah, i Allahs namn."
+   },
+   {
+    "t": 17.86,
+    "text": "Tvätta händerna upp till handlederna, tre gånger. Börja med höger."
+   },
+   {
+    "t": 24.01,
+    "text": "Skölj munnen tre gånger."
+   },
+   {
+    "t": 30.01,
+    "text": "Dra upp vatten i näsan och blås ut, tre gånger."
+   },
+   {
+    "t": 36.15,
+    "text": "Tvätta hela ansiktet från hårfästet till hakan och mellan öronen, tre gånger."
+   },
+   {
+    "t": 43.21,
+    "text": "Tvätta armarna upp till och med armbågarna, tre gånger. Först höger, sedan vänster."
+   },
+   {
+    "t": 50.72,
+    "text": "Stryk de våta händerna över huvudet en gång, framifrån och bakåt och tillbaka."
+   },
+   {
+    "t": 58.23,
+    "text": "Torka öronen, insidan med pekfingrarna och baksidan med tummarna."
+   },
+   {
+    "t": 64.23,
+    "text": "Tvätta fötterna upp till och med anklarna, tre gånger. Börja med höger fot."
+   },
+   {
+    "t": 71.74,
+    "text": "Avsluta med trosbekännelsen: Ashhadu an la ilaha illa Allah, wa ashhadu anna Muhammadan abduhu wa rasuluh."
+   }
+  ]
+ },
+ {
+  "slug": "tasbih",
+  "title": "Tasbih efter bönen",
+  "subtitle": "33 · 33 · 33 + 1",
+  "premium": false,
+  "duration": 56.0,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Tasbih efter bönen"
+   },
+   {
+    "t": 3.3,
+    "text": "Efter varje obligatorisk bön är det sunna att prisa Allah med tasbih."
+   },
+   {
+    "t": 10.35,
+    "text": "Säg SubhanAllah, ära vare Allah, trettiotre gånger."
+   },
+   {
+    "t": 18.35,
+    "text": "Säg Alhamdulillah, all lovprisning tillhör Allah, trettiotre gånger."
+   },
+   {
+    "t": 26.35,
+    "text": "Säg Allahu Akbar, allah är störst, trettiotre gånger."
+   },
+   {
+    "t": 34.35,
+    "text": "Fullborda hundra med: La ilaha illa Allahu wahdahu la sharika lah, lahul mulku wa lahul hamd, wa huwa ala kulli shayin qadir. Den som säger detta får sina synder förlåtna, även om de är som havets skum."
+   }
+  ]
+ },
+ {
+  "slug": "bonetider",
+  "title": "Bönetiderna och solen",
+  "subtitle": "Varför tiderna ändras",
+  "premium": true,
+  "duration": 68.6,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Bönetiderna och solen"
+   },
+   {
+    "t": 3.3,
+    "text": "Bönetiderna följer solens gång över himlen. Därför ändras de under året, särskilt här i Sverige."
+   },
+   {
+    "t": 11.72,
+    "text": "Fajr börjar när gryningsljuset syns vid horisonten, en god stund innan solen går upp."
+   },
+   {
+    "t": 19.68,
+    "text": "Soluppgången avslutar tiden för Fajr. Då ber man inte."
+   },
+   {
+    "t": 25.68,
+    "text": "Dhuhr börjar strax efter att solen passerat sin högsta punkt mitt på dagen."
+   },
+   {
+    "t": 33.19,
+    "text": "Asr börjar när ett föremåls skugga är lika lång som föremålet självt, enligt Hanafi när den är dubbelt så lång."
+   },
+   {
+    "t": 43.88,
+    "text": "Maghrib börjar direkt när solen har gått ner."
+   },
+   {
+    "t": 49.88,
+    "text": "Isha börjar när kvällsrodnaden har försvunnit och det har blivit mörkt."
+   },
+   {
+    "t": 56.48,
+    "text": "I appen räknas tiderna ut för just din plats, och telefonen kan väcka dig till Fajr."
+   }
+  ]
+ },
+ {
+  "slug": "hajj",
+  "title": "Hajj steg för steg",
+  "subtitle": "Vallfärden till Mecka",
+  "premium": true,
+  "duration": 90.2,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Hajj steg för steg"
+   },
+   {
+    "t": 3.3,
+    "text": "Hajj sker i månaden Dhul-Hijja. Pilgrimen går in i ihram, ett tillstånd av helgd, och säger talbiya: Labbayk Allahumma labbayk."
+   },
+   {
+    "t": 13.99,
+    "text": "I Mecka gör pilgrimen tawaf: sju varv runt Kaba, moturs."
+   },
+   {
+    "t": 22.99,
+    "text": "Sedan går pilgrimen sju gånger mellan kullarna Safa och Marwa, till minne av Hajar."
+   },
+   {
+    "t": 31.99,
+    "text": "Den åttonde dagen beger sig pilgrimerna till tältstaden Mina."
+   },
+   {
+    "t": 37.99,
+    "text": "Den nionde dagen står pilgrimerna på Arafat och ber till Allah fram till solnedgången. Detta är Hajjens viktigaste del."
+   },
+   {
+    "t": 48.23,
+    "text": "Efter solnedgången går man till Muzdalifah, ber och övernattar under bar himmel och samlar småstenar."
+   },
+   {
+    "t": 56.65,
+    "text": "På Eid-dagen kastar man sju stenar på Jamarat al-Aqaba, offrar ett djur och rakar eller klipper håret."
+   },
+   {
+    "t": 65.97,
+    "text": "Därefter återvänder man till Mecka för tawaf al-ifada."
+   },
+   {
+    "t": 71.97,
+    "text": "Under tashriq-dagarna i Mina kastar man sten på alla tre pelarna varje dag."
+   },
+   {
+    "t": 79.48,
+    "text": "Innan man lämnar Mecka gör man en avskedstawaf. Må Allah acceptera din Hajj."
+   }
+  ]
+ },
+ {
+  "slug": "ramadan",
+  "title": "Ramadan",
+  "subtitle": "Fastans månad",
+  "premium": true,
+  "duration": 68.6,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Ramadan"
+   },
+   {
+    "t": 3.3,
+    "text": "Ramadan är den nionde månaden i den islamiska kalendern. Den börjar när den nya månskäran siktas."
+   },
+   {
+    "t": 12.17,
+    "text": "Före gryningen äter man suhur. Profeten (frid vare med honom) sa: Ät suhur, för i suhur finns välsignelse."
+   },
+   {
+    "t": 21.95,
+    "text": "Från Fajr till Maghrib avstår man från mat, dryck och allt som bryter fastan, och vaktar sin tunga och sina handlingar."
+   },
+   {
+    "t": 33.1,
+    "text": "Vid solnedgången bryter man fastan med iftar, gärna med dadlar och vatten enligt sunna."
+   },
+   {
+    "t": 41.06,
+    "text": "På kvällarna ber många tarawih tillsammans i moskén och läser Quran."
+   },
+   {
+    "t": 47.66,
+    "text": "Laylat al-Qadr, maktens natt, finns bland de sista tio nätterna. Den är bättre än tusen månader."
+   },
+   {
+    "t": 56.54,
+    "text": "Ramadan avslutas med Eid al-Fitr. Zakat al-fitr ska ges före Eid-bönen så att alla kan fira."
+   }
+  ]
+ },
+ {
+  "slug": "zakat",
+  "title": "Zakat",
+  "subtitle": "Så fungerar allmosan",
+  "premium": true,
+  "duration": 62.5,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Zakat"
+   },
+   {
+    "t": 3.3,
+    "text": "Zakat är islams tredje pelare: en rättighet som de behövande har i de rikas förmögenhet."
+   },
+   {
+    "t": 11.72,
+    "text": "Zakat är obligatorisk när ditt sparade kapital når nisab, värdet av 85 gram guld."
+   },
+   {
+    "t": 19.72,
+    "text": "Kapitalet måste ha legat över nisab under ett helt månår, ett hawl."
+   },
+   {
+    "t": 26.77,
+    "text": "Då ger du två och en halv procent. Har du hundratusen kronor blir zakat tvåtusenfemhundra kronor."
+   },
+   {
+    "t": 35.65,
+    "text": "Koranen nämner åtta grupper som zakat får gå till: de fattiga, de behövande, de som samlar in den, nya muslimer, att frige fångar, de skuldsatta, på Allahs väg och resande i nöd."
+   },
+   {
+    "t": 51.79,
+    "text": "Du kan ge din zakat genom Islamiska Förbundet direkt i appen under Donera."
+   }
+  ]
+ }
+]
