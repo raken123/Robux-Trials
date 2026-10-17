@@ -1,5 +1,74 @@
 [
  {
+  "slug": "omar",
+  "title": "Omar – vägen tillbaka",
+  "subtitle": "En film om tawba",
+  "premium": false,
+  "duration": 131.2,
+  "cues": [
+   {
+    "t": 0.3,
+    "text": "Omar – vägen tillbaka"
+   },
+   {
+    "t": 3.3,
+    "text": "Det här är Omar. Han är sjutton år och bor i Stockholm. Nätterna går åt till mobilen och spel."
+   },
+   {
+    "t": 13.54,
+    "text": "När väckarklockan ringer till Fajr stänger han av den och somnar om. Igen."
+   },
+   {
+    "t": 21.05,
+    "text": "Mamma frågar om han har bett. Omar ljuger och säger ja."
+   },
+   {
+    "t": 29.05,
+    "text": "I skolan fuskar han på provet i stället för att plugga."
+   },
+   {
+    "t": 35.65,
+    "text": "På kvällarna hänger han med fel vänner. De svär, bråkar och gör sådant som Omar vet är haram."
+   },
+   {
+    "t": 45.43,
+    "text": "Hemma sitter mamma uppe sent och väntar, orolig och ledsen."
+   },
+   {
+    "t": 51.57,
+    "text": "En natt går allt för långt. Blåljusen lyser upp gatan, och Omar springer därifrån med hjärtat i halsen."
+   },
+   {
+    "t": 61.35,
+    "text": "Ensam på en parkbänk i gryningen hör han azan från moskén: Hayya ala as-salah, kom till bönen."
+   },
+   {
+    "t": 70.68,
+    "text": "Han går in i moskén. Jag har gjort så mycket fel, säger Omar. Välkommen, min son, svarar imamen."
+   },
+   {
+    "t": 80.46,
+    "text": "Imamen läser ur Koranen: Misströsta inte om Allahs nåd. Allah förlåter alla synder."
+   },
+   {
+    "t": 88.46,
+    "text": "Omar gör tawba. Han tvättar sig, ställer sig på bönemattan och ber för första gången på länge."
+   },
+   {
+    "t": 97.79,
+    "text": "Han går hem och ber sin mamma om förlåtelse. Hon kramar honom med tårar i ögonen."
+   },
+   {
+    "t": 106.66,
+    "text": "Nu går Omar upp till Fajr, pluggar ärligt, hjälper sin mamma och umgås med vänner som drar honom mot det goda."
+   },
+   {
+    "t": 117.81,
+    "text": "Det är aldrig för sent att vända tillbaka till Allah. Dörren till tawba står öppen så länge du lever."
+   }
+  ]
+ },
+ {
   "slug": "pelare",
   "title": "Islams fem pelare",
   "subtitle": "Grunden i en muslims liv",

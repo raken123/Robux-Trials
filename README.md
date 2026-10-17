@@ -9,7 +9,7 @@ Islamiska Förbundets officiella app: spåra dina böner, lyssna på Quran och d
 | **Quran** | Alla 114 suror med arabisk text och svensk översättning (Knut Bernström), ljud av Alafasy eller Al-Husary. Lästa suror sparas för offline. |
 | **Qibla** | Kompass mot Kaba med avstånd till Mecka. |
 | **Donera** | Välj ändamål och belopp, betala med Swish. |
-| **Islamiska videor** | Åtta egna animerade videor som följer med i appen (fungerar offline), med svensk berättarröst via telefonens talsyntes. Fri: Islams fem pelare, Så ber du, Wudu, Tasbih. Premium: Bönetiderna och solen, Hajj, Ramadan, Zakat. |
+| **Islamiska videor** | Kortfilmen "Omar – vägen tillbaka" och åtta egna animerade videor som följer med i appen (fungerar offline), med svensk berättarröst via telefonens talsyntes. Fri: Islams fem pelare, Så ber du, Wudu, Tasbih. Premium: Bönetiderna och solen, Hajj, Ramadan, Zakat. |
 | **Premium** | Prenumeration via Google Play – inga reklamer, fler videor, 98 % går till zakat. |
 | **Pengarkalkyl** | Kostnad för Hajj/Umrah och hur mycket du behöver spara per månad. |
 

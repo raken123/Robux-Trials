@@ -788,7 +788,9 @@ def zakat_scenes():
 
 
 def all_videos():
+    from omar import omar_scenes
     return [
+        Video("omar", "Omar – vägen tillbaka", "En film om tawba", omar_scenes(), thumb_at=0.55),
         Video("pelare", "Islams fem pelare", "Grunden i en muslims liv", pillars_scenes()),
         Video("salah", "Så ber du", "Bönen steg för steg", salah_scenes(), thumb_at=0.4),
         Video("wudu", "Wudu", "Tvagningen steg för steg", wudu_scenes(), thumb_at=0.5),

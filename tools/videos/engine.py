@@ -275,6 +275,8 @@ def base_background() -> Image.Image:
 
 
 def header(c: Ctx, title: str):
+    w = c.text_w(title, 22, "bold")
+    c.rect(16, 16, 92 + w, 64, fill=(10, 13, 50, 170), radius=24)
     c.logo(44, 40, 40)
     c.text(76, 40, title, 22, GOLD_LIGHT, "bold", anchor="lm")
 

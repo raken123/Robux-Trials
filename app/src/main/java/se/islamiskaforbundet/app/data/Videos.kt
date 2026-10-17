@@ -21,6 +21,7 @@ data class AppVideo(
 object Videos {
     // Explicit references keep the resource shrinker from removing the files.
     private val RES = mapOf(
+        "omar" to (R.raw.video_omar to R.drawable.thumb_omar),
         "pelare" to (R.raw.video_pelare to R.drawable.thumb_pelare),
         "salah" to (R.raw.video_salah to R.drawable.thumb_salah),
         "wudu" to (R.raw.video_wudu to R.drawable.thumb_wudu),
