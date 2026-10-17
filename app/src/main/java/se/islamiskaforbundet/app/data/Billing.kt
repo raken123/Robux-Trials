@@ -47,7 +47,7 @@ object Billing {
                 ) { r, purchases ->
                     if (r.responseCode == BillingClient.BillingResponseCode.OK) {
                         val active = purchases.any { it.purchaseState == Purchase.PurchaseState.PURCHASED }
-                        setPremium(active)
+                        applyPremium(active)
                         handle(purchases)
                     }
                 }
@@ -92,7 +92,7 @@ object Billing {
 
     private fun handle(purchases: List<Purchase>) {
         purchases.filter { it.purchaseState == Purchase.PurchaseState.PURCHASED }.forEach { p ->
-            setPremium(true)
+            applyPremium(true)
             if (!p.isAcknowledged) {
                 client?.acknowledgePurchase(
                     AcknowledgePurchaseParams.newBuilder().setPurchaseToken(p.purchaseToken).build()
@@ -101,7 +101,7 @@ object Billing {
         }
     }
 
-    private fun setPremium(on: Boolean) {
+    private fun applyPremium(on: Boolean) {
         Prefs.premium = on
         premium = on
         if (on) status = null
