@@ -1,0 +1,33 @@
+name: Premium QR code
+
+on:
+  push:
+    paths:
+      - "tools/qr/**"
+      - ".github/workflows/qr.yml"
+  workflow_dispatch:
+
+jobs:
+  qr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Fetch zxing
+        run: |
+          mkdir -p /tmp/zx
+          for a in core javase; do
+            curl -sSfL -o /tmp/zx/$a.jar https://repo1.maven.org/maven2/com/google/zxing/$a/3.5.3/$a-3.5.3.jar
+          done
+      - name: Encode payload
+        run: |
+          javac -cp "/tmp/zx/*" -d /tmp/zx tools/qr/QrTool.java
+          java -cp "/tmp/zx:/tmp/zx/*" QrTool encode tools/qr/payload.txt
+      - name: Verify rendered images
+        run: |
+          shopt -s nullglob
+          files=(tools/qr/*.png)
+          if [ ${#files[@]} -gt 0 ]; then java -cp "/tmp/zx:/tmp/zx/*" QrTool decode "${files[@]}"; fi

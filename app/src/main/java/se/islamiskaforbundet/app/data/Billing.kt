@@ -22,14 +22,22 @@ object Billing {
     private var client: BillingClient? = null
     private var details: ProductDetails? = null
 
-    var premium by mutableStateOf(false)
+    /** Active Google Play subscription. */
+    var purchased by mutableStateOf(false)
         private set
+    /** End of a free period unlocked with a QR code (epoch millis). */
+    var trialUntil by mutableStateOf(0L)
+        private set
+
+    val premium: Boolean
+        get() = purchased || trialUntil > System.currentTimeMillis()
     var price by mutableStateOf<String?>(null)
         private set
     var status by mutableStateOf<String?>(null)
 
     fun start(context: Context) {
-        premium = Prefs.premium
+        purchased = Prefs.premium
+        trialUntil = Prefs.trialUntil
         if (client != null) return
         val c = BillingClient.newBuilder(context.applicationContext)
             .setListener { result, purchases ->
@@ -101,9 +109,14 @@ object Billing {
         }
     }
 
+    fun grantTrial(untilMillis: Long) {
+        Prefs.trialUntil = untilMillis
+        trialUntil = untilMillis
+    }
+
     private fun applyPremium(on: Boolean) {
         Prefs.premium = on
-        premium = on
+        purchased = on
         if (on) status = null
     }
 }

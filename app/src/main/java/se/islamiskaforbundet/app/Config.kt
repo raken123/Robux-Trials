@@ -19,6 +19,12 @@ object Config {
     /** Google Play subscription product id for Premium (create it in Play Console). */
     const val PREMIUM_PRODUCT_ID = "premium_monthly"
 
+    /**
+     * Key for signing free-Premium QR codes (see tools/qr). Codes look like
+     * IFPREMIUM1|<campaign>|<days>|<signature>. Changing the key invalidates printed codes.
+     */
+    const val PREMIUM_CODE_KEY = "e62146df47eeb85fb73b056765a37e29834ac8cd5c1fde45"
+
     /** Share of Premium revenue that goes to zakat, as shown in the app. */
     const val PREMIUM_ZAKAT_PERCENT = 98
 }

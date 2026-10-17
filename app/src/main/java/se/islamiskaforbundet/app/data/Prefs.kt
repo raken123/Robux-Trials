@@ -60,6 +60,13 @@ object Prefs {
         get() = sp.getBoolean("premium", false)
         set(v) = sp.edit().putBoolean("premium", v).apply()
 
+    /** End of a free Premium period from a scanned code (epoch millis), 0 = none. */
+    var trialUntil: Long
+        get() = sp.getLong("trial_until", 0)
+        set(v) = sp.edit().putLong("trial_until", v).apply()
+    fun campaignUsed(id: String) = sp.getBoolean("campaign_$id", false)
+    fun markCampaignUsed(id: String) = sp.edit().putBoolean("campaign_$id", true).apply()
+
     var reciter: String
         get() = sp.getString("reciter", "ar.alafasy")!!
         set(v) = sp.edit().putString("reciter", v).apply()
