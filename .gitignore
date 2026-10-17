@@ -8,3 +8,4 @@ captures/
 *.jks
 *.keystore
 !debug.keystore
+dist/
