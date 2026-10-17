@@ -10,3 +10,4 @@ captures/
 !debug.keystore
 dist/
 __pycache__/
+web/vendor/

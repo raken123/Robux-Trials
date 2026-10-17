@@ -146,6 +146,7 @@ video { width: 100%; display: block; background: #000; }
 <div class="overlay" id="overlay"><div class="box" id="overlayBox"></div></div>
 <div class="toast" id="toast"></div>
 
+<!--VENDOR-->
 <script>
 /* ------------------------------------------------------------------ config */
 const CONFIG = {
@@ -156,6 +157,17 @@ const CONFIG = {
   zakatPercent: 98,
 };
 const VIDEOS = /*VIDEOS_JSON*/[];
+/* Standalone build: videos and thumbnails embedded as base64 (null when served as separate files). */
+const MEDIA = /*MEDIA_JSON*/null;
+const thumbSrc = slug => MEDIA ? "data:image/jpeg;base64," + MEDIA.thumbs[slug] : `thumbs/thumb_${slug}.jpg`;
+let videoBlobUrl = null;
+function videoSrc(slug) {
+  if (!MEDIA) return `videos/video_${slug}.mp4`;
+  const bin = atob(MEDIA.videos[slug]), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  if (videoBlobUrl) URL.revokeObjectURL(videoBlobUrl);
+  return videoBlobUrl = URL.createObjectURL(new Blob([bytes], { type: "video/mp4" }));
+}
 
 /* ------------------------------------------------------------------ storage */
 const store = {
@@ -399,7 +411,7 @@ views.salah.mount = () => {
     $("#cancel").onclick = closeOverlay;
     $("#use").onclick = () => { store.set("mat_code", code); closeOverlay(); toast("Bönemattan är registrerad"); render(); };
     $("#print").onclick = () => { const w = window.open(""); if (w) { w.document.write(`<title>Bönematta</title><div style="text-align:center;font-family:sans-serif">${$("#qr").innerHTML}<p>${code}</p></div>`); w.document.close(); w.print(); } };
-    try { await loadScript("https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js");
+    try { if (typeof qrcode === "undefined") await loadScript("https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js");
       const q = qrcode(0, "M"); q.addData(code); q.make(); $("#qr").innerHTML = q.createSvgTag({ cellSize: 6, margin: 2 }); }
     catch { $("#qr").textContent = "Kunde inte skapa QR-koden (ingen internetanslutning)."; }
   };
@@ -573,17 +585,18 @@ views.donate.mount = () => {
 /* videos */
 views.videos = () => hero("Islamiska videor", premium.active ? "Premium · alla videor" : "Lås upp fler med Premium") + `<div class="pad">${banner()}
   ${VIDEOS.map(v => { const locked = v.premium && !premium.active; const d = Math.round(v.duration);
-    return `<div class="card click video-card" data-go="${locked ? "premium" : "video/" + v.slug}"><div class="thumb ${locked ? "locked" : ""}" style="background-image:url('thumbs/thumb_${v.slug}.jpg')">
+    return `<div class="card click video-card" data-go="${locked ? "premium" : "video/" + v.slug}"><div class="thumb ${locked ? "locked" : ""}" style="background-image:url('${thumbSrc(v.slug)}')">
       <div class="play">${locked ? "🔒" : "▶"}</div><span class="dur">${Math.floor(d / 60)}:${pad2(d % 60)}</span></div>
       <div class="row" style="padding:12px 14px"><div class="grow"><b>${esc(v.title)}</b><div class="muted">${esc(v.subtitle)}</div></div>${v.premium ? '<span class="tag">Premium</span>' : ""}</div></div>`; }).join("")}</div>`;
 views.video = (slug) => { const v = VIDEOS.find(x => x.slug === slug); if (!v) return views.videos();
   if (v.premium && !premium.active) return views.premium();
-  return `<video id="vid" src="videos/video_${v.slug}.mp4" controls playsinline autoplay></video><div class="pad">
+  return `<video id="vid" controls playsinline autoplay></video><div class="pad">
     <h2 style="margin:0">${esc(v.title)}</h2><div class="muted">${esc(v.subtitle)}</div>
     <label class="row card"><div class="grow"><b>Berättarröst</b><div class="muted" id="ttsInfo">Läser texten högt på svenska</div></div><input type="checkbox" id="narr" ${store.get("narration", true) ? "checked" : ""}></label>
     <p class="muted">Animerad video av Islamiska Förbundet. Texten visas även i bild.</p></div>`; };
 let narrTimer = null;
 views.video.mount = (slug) => { const v = VIDEOS.find(x => x.slug === slug), vid = $("#vid"); if (!v || !vid) return;
+  vid.src = videoSrc(slug); vid.play().catch(() => {});
   audio().pause(); const synth = window.speechSynthesis;
   if (!synth) { $("#narr").disabled = true; $("#ttsInfo").textContent = "Webbläsaren saknar talsyntes"; }
   $("#narr").onchange = e => { store.set("narration", e.target.checked); if (!e.target.checked) synth && synth.cancel(); };

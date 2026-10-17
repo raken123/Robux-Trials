@@ -27,6 +27,8 @@ att bilden går att läsa.
 och Hajj-kalkyl). `python3 tools/build_web.py` bygger `dist/IslamiskaForbundet-web.zip` med videor och bilder. Packa upp och
 lägg på valfri webbserver (eller öppna `index.html`). Bönelarmet ringer bara medan sidan är öppen.
 
+Samma skript bygger även `dist/IslamiskaForbundet-standalone.html`: **en enda fil** med videor, bilder och QR-läsare inbakade, som fungerar offline (Quran-texten och ljudet hämtas fortfarande från internet).
+
 ## Bönematta
 Under **Bön → Bönematta** väljer du antingen *Skapa QR-kod* (skriv ut den och fäst på mattan) eller *Registrera* för att skanna en QR-/streckkod som redan sitter på mattan. När larmet ringer öppnas kameran och endast den koden stänger av ljudet. Larmet slutar av sig självt efter 15 minuter, och det finns ett diskret nödstopp som inte loggar bönen.
 

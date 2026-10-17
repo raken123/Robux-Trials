@@ -48,6 +48,10 @@ jobs:
           mkdir -p dist
           cp app/build/outputs/apk/release/app-release.apk dist/IslamiskaForbundet.apk
           cp app/build/outputs/bundle/release/app-release.aab dist/IslamiskaForbundet.aab
+          mkdir -p web/vendor
+          curl -sSfL -o web/vendor/jsQR.js https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js
+          curl -sSfL -o web/vendor/qrcode.js https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js
+          pip install --quiet pillow
           python3 tools/build_web.py
           cp tools/qr/premium-30-dagar.png dist/Premium-30-dagar-gratis.png
           ls -la dist
@@ -60,6 +64,7 @@ jobs:
             dist/IslamiskaForbundet.apk
             dist/IslamiskaForbundet.aab
             dist/IslamiskaForbundet-web.zip
+            dist/IslamiskaForbundet-standalone.html
             dist/Premium-30-dagar-gratis.png
 
       - name: Publish GitHub release
@@ -73,4 +78,5 @@ jobs:
             dist/IslamiskaForbundet.apk
             dist/IslamiskaForbundet.aab
             dist/IslamiskaForbundet-web.zip
+            dist/IslamiskaForbundet-standalone.html
             dist/Premium-30-dagar-gratis.png
